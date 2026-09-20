@@ -1,0 +1,1345 @@
+<title>Evaluación de Desempeño GTI | DISC + Competencias</title>
+<style>
+:root {
+  --pri: #1B365D; --pri-l: #2A4A7F; --pri-d: #0F1F3A;
+  --sec: #2E7D32; --sec-l: #43A047;
+  --acc: #E65100; --acc-l: #F57C00;
+  --d-color: #C62828; --i-color: #F9A825; --s-color: #2E7D32; --c-color: #1565C0;
+  --bg: #F5F6FA; --card: #FFFFFF; --text: #1A1A2E; --text-2: #4A4A6A;
+  --border: #E0E3EB; --shadow: 0 2px 12px rgba(27,54,93,0.08);
+  --radius: 12px; --max-w: 800px;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0F1119;--card:#1A1D2E;--text:#E8E8F0;--text-2:#9A9AB8;--border:#2A2D40;--shadow:0 2px 12px rgba(0,0,0,0.3);
+}}
+:root[data-theme="dark"]{
+  --bg:#0F1119;--card:#1A1D2E;--text:#E8E8F0;--text-2:#9A9AB8;--border:#2A2D40;--shadow:0 2px 12px rgba(0,0,0,0.3);
+}
+body{background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,sans-serif;font-size:15px;line-height:1.6;margin:0;padding:0 16px}
+*,*::before,*::after{box-sizing:border-box}
+.container{max-width:var(--max-w);margin:0 auto;padding:24px 0}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:32px;box-shadow:var(--shadow);margin-bottom:24px}
+h1{font-size:1.8em;color:var(--pri);margin:0 0 8px;line-height:1.2}
+h2{font-size:1.35em;color:var(--pri);margin:24px 0 12px;border-bottom:2px solid var(--border);padding-bottom:8px}
+h3{font-size:1.1em;color:var(--pri-l);margin:16px 0 8px}
+.subtitle{color:var(--text-2);font-size:0.95em;margin-bottom:24px}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 32px;border:none;border-radius:8px;font-size:1em;font-weight:600;cursor:pointer;transition:all 0.2s}
+.btn-primary{background:var(--pri);color:#fff}.btn-primary:hover{background:var(--pri-l)}
+.btn-secondary{background:var(--sec);color:#fff}.btn-secondary:hover{background:var(--sec-l)}
+.btn-outline{background:transparent;color:var(--pri);border:2px solid var(--pri)}.btn-outline:hover{background:var(--pri);color:#fff}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+.btn-group{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-weight:600;margin-bottom:6px;color:var(--text)}
+.form-group input,.form-group select{width:100%;padding:12px;border:1px solid var(--border);border-radius:8px;font-size:1em;background:var(--card);color:var(--text)}
+.form-group input:focus,.form-group select:focus{outline:none;border-color:var(--pri);box-shadow:0 0 0 3px rgba(27,54,93,0.15)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+.progress-bar{width:100%;height:8px;background:var(--border);border-radius:4px;overflow:hidden;margin-bottom:16px}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--pri),var(--sec));border-radius:4px;transition:width 0.4s ease}
+.progress-text{text-align:center;font-size:0.85em;color:var(--text-2);margin-bottom:8px}
+.disc-block{margin-bottom:32px}
+.disc-block h3{text-align:center;margin-bottom:16px}
+.disc-options{display:grid;gap:10px}
+.disc-option{display:flex;align-items:center;gap:12px;padding:16px;border:2px solid var(--border);border-radius:10px;cursor:pointer;transition:all 0.2s;user-select:none}
+.disc-option:hover{border-color:var(--pri-l);background:rgba(27,54,93,0.03)}
+.disc-option.selected-most{border-color:var(--sec);background:rgba(46,125,50,0.08)}
+.disc-option.selected-least{border-color:var(--d-color);background:rgba(198,40,40,0.06)}
+.disc-option .label-tag{font-size:0.7em;font-weight:700;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.disc-option .label-tag.most{background:rgba(46,125,50,0.15);color:var(--sec)}
+.disc-option .label-tag.least{background:rgba(198,40,40,0.12);color:var(--d-color)}
+.disc-option .text{flex:1;font-size:0.95em}
+.disc-instruction{text-align:center;padding:12px;background:rgba(27,54,93,0.05);border-radius:8px;margin-bottom:20px;font-size:0.9em;color:var(--text-2)}
+.likert-item{padding:16px 0;border-bottom:1px solid var(--border)}
+.likert-item:last-child{border-bottom:none}
+.likert-text{margin-bottom:10px;font-weight:500}
+.likert-scale{display:flex;gap:4px;flex-wrap:wrap}
+.likert-btn{flex:1;min-width:60px;padding:10px 8px;border:2px solid var(--border);border-radius:8px;background:var(--card);cursor:pointer;text-align:center;font-size:0.8em;transition:all 0.2s;color:var(--text)}
+.likert-btn:hover{border-color:var(--pri-l)}
+.likert-btn.selected{border-color:var(--pri);background:var(--pri);color:#fff}
+.cluster-header{background:linear-gradient(135deg,var(--pri),var(--pri-l));color:#fff;padding:16px 20px;border-radius:10px;margin:24px 0 16px;font-weight:700;font-size:1.05em}
+.screen{display:none}.screen.active{display:block}
+.logo-area{text-align:center;padding:40px 0 20px}
+.logo-area .logo-text{font-size:2.4em;font-weight:800;color:var(--pri);letter-spacing:-1px}
+.logo-area .logo-sub{font-size:1em;color:var(--text-2);margin-top:4px}
+.badge{display:inline-block;padding:4px 12px;border-radius:20px;font-size:0.75em;font-weight:600}
+.badge-d{background:rgba(198,40,40,0.12);color:var(--d-color)}
+.badge-i{background:rgba(249,168,37,0.15);color:#E65100}
+.badge-s{background:rgba(46,125,50,0.12);color:var(--s-color)}
+.badge-c{background:rgba(21,101,192,0.12);color:var(--c-color)}
+.result-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;margin:16px 0}
+.result-card{padding:20px;border-radius:10px;text-align:center}
+.result-card .score{font-size:2.2em;font-weight:800;line-height:1}
+.result-card .label{font-size:0.85em;margin-top:6px;font-weight:600}
+.result-card .pct{font-size:0.8em;opacity:0.7;margin-top:2px}
+.chart-container{display:flex;justify-content:center;margin:20px 0;overflow-x:auto}
+.comp-bar{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.comp-bar .name{width:160px;text-align:right;font-size:0.85em;font-weight:500;flex-shrink:0}
+.comp-bar .bar-bg{flex:1;height:24px;background:var(--border);border-radius:6px;overflow:hidden;position:relative}
+.comp-bar .bar-fill{height:100%;border-radius:6px;transition:width 0.6s ease}
+.comp-bar .bar-val{font-size:0.8em;font-weight:700;width:40px;text-align:right;flex-shrink:0}
+.level-tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:0.75em;font-weight:600}
+.level-critico{background:#FFEBEE;color:#C62828}
+.level-desarrollo{background:#FFF3E0;color:#E65100}
+.level-competente{background:#E3F2FD;color:#1565C0}
+.level-avanzado{background:#E8F5E9;color:#2E7D32}
+.level-destacado{background:#F3E5F5;color:#6A1B9A}
+table.data{width:100%;border-collapse:collapse;font-size:0.9em;margin:16px 0}
+table.data th{background:var(--pri);color:#fff;padding:10px 12px;text-align:left;font-weight:600}
+table.data td{padding:10px 12px;border-bottom:1px solid var(--border)}
+table.data tr:hover td{background:rgba(27,54,93,0.03)}
+.consent-box{max-height:300px;overflow-y:auto;padding:20px;background:rgba(27,54,93,0.03);border-radius:8px;font-size:0.9em;margin-bottom:16px;border:1px solid var(--border)}
+.check-label{display:flex;align-items:center;gap:10px;cursor:pointer;font-weight:500;margin:16px 0}
+.check-label input{width:18px;height:18px;accent-color:var(--pri)}
+.alert{padding:12px 16px;border-radius:8px;margin-bottom:16px;font-size:0.9em}
+.alert-warning{background:#FFF3E0;color:#E65100;border:1px solid #FFE0B2}
+.alert-info{background:#E3F2FD;color:#1565C0;border:1px solid #BBDEFB}
+.spinner{width:60px;height:60px;border:4px solid var(--border);border-top-color:var(--pri);border-radius:50%;animation:spin 0.8s linear infinite;margin:40px auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+.rec-item{padding:12px 16px;border-left:4px solid var(--pri);background:rgba(27,54,93,0.03);border-radius:0 8px 8px 0;margin-bottom:10px}
+.rec-item strong{color:var(--pri)}
+.watermark{text-align:center;padding:16px;font-size:0.8em;color:var(--text-2);border-top:1px solid var(--border);margin-top:32px}
+.nav-dots{display:flex;justify-content:center;gap:8px;margin:20px 0}
+.nav-dot{width:10px;height:10px;border-radius:50%;background:var(--border);transition:all 0.3s}
+.nav-dot.active{background:var(--pri);transform:scale(1.3)}
+.nav-dot.done{background:var(--sec)}
+.ficha-tecnica{font-size:0.85em;color:var(--text-2)}
+.ficha-tecnica td{vertical-align:top}
+@media print{
+  body{background:#fff;color:#000;font-size:12px;padding:0}
+  .no-print{display:none!important}
+  .card{box-shadow:none;border:1px solid #ddd;page-break-inside:avoid}
+  .result-card{border:1px solid #ddd}
+  h2{page-break-after:avoid}
+}
+</style>
+
+<div class="container" id="app">
+
+  <!-- SCREEN: Welcome -->
+  <div class="screen active" id="screen-welcome">
+    <div class="logo-area">
+      <div class="logo-text">GTI</div>
+      <div class="logo-sub">Gestión del Talento e Innovación</div>
+    </div>
+    <div class="card" style="text-align:center">
+      <h1>Evaluación Integral de Desempeño</h1>
+      <p class="subtitle">Instrumento DISC + Competencias Organizacionales</p>
+      <p>Este instrumento evalúa su perfil conductual (modelo DISC) y sus competencias organizacionales clave para generar un diagnóstico integral de desempeño laboral.</p>
+      <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:24px 0">
+        <div><span class="badge badge-d">D</span> Dominancia</div>
+        <div><span class="badge badge-i">I</span> Influencia</div>
+        <div><span class="badge badge-s">S</span> Estabilidad</div>
+        <div><span class="badge badge-c">C</span> Cumplimiento</div>
+      </div>
+      <p style="font-size:0.9em;color:var(--text-2)">Duración aproximada: 25-35 minutos<br>88 ítems + 3 de consistencia</p>
+      <div class="btn-group" style="justify-content:center">
+        <button class="btn btn-primary" onclick="showScreen('screen-consent')">Iniciar evaluación</button>
+      </div>
+    </div>
+    <div class="watermark">GTI Performance Assessment v1.0 &mdash; Propiedad de GTI Costa Rica &mdash; gticr.net</div>
+  </div>
+
+  <!-- SCREEN: Consent -->
+  <div class="screen" id="screen-consent">
+    <div class="card">
+      <h1>Consentimiento Informado</h1>
+      <div class="consent-box">
+        <p><strong>AVISO DE CONFIDENCIALIDAD Y CONSENTIMIENTO INFORMADO</strong></p>
+        <p><strong>Propósito:</strong> Esta evaluación tiene como objetivo obtener un perfil conductual y de competencias laborales con fines de selección, desarrollo o diagnóstico organizacional. Los resultados serán utilizados exclusivamente por el profesional de recursos humanos o el consultor autorizado que administra esta evaluación.</p>
+        <p><strong>Confidencialidad:</strong> Sus respuestas son estrictamente confidenciales. Los datos recopilados serán tratados conforme a la Ley N° 8968 de Protección de la Persona frente al Tratamiento de sus Datos Personales (Costa Rica) y normativas equivalentes aplicables en su país de residencia. La información no será compartida con terceros sin su autorización expresa.</p>
+        <p><strong>Naturaleza de la evaluación:</strong> No existen respuestas correctas o incorrectas. El instrumento mide preferencias conductuales y frecuencia de comportamientos laborales. Se solicita que responda con honestidad para obtener un perfil válido y útil.</p>
+        <p><strong>Uso de resultados:</strong> Los resultados generan un perfil descriptivo, no un diagnóstico clínico. Deben ser interpretados por un profesional calificado en evaluación psicométrica. No constituyen por sí solos una decisión de contratación, promoción o desvinculación.</p>
+        <p><strong>Participación voluntaria:</strong> Su participación es voluntaria. Puede abandonar la evaluación en cualquier momento sin consecuencias. Al aceptar, confirma que ha leído y comprendido esta información.</p>
+        <p><strong>Responsable del tratamiento:</strong> GTI — Gestión del Talento e Innovación, San José, Costa Rica. Contacto: rbustamante@efhcr.com</p>
+      </div>
+      <label class="check-label">
+        <input type="checkbox" id="consent-check" onchange="document.getElementById('consent-btn').disabled=!this.checked">
+        He leído y acepto los términos del consentimiento informado
+      </label>
+      <div class="btn-group">
+        <button class="btn btn-outline" onclick="showScreen('screen-welcome')">Volver</button>
+        <button class="btn btn-primary" id="consent-btn" disabled onclick="showScreen('screen-registration')">Continuar</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Registration -->
+  <div class="screen" id="screen-registration">
+    <div class="card">
+      <h1>Datos del Evaluado</h1>
+      <p class="subtitle">Complete la siguiente información. Todos los campos son obligatorios.</p>
+      <form id="reg-form" onsubmit="return handleRegistration(event)">
+        <div class="form-row">
+          <div class="form-group"><label>Nombre completo</label><input type="text" id="reg-name" required></div>
+          <div class="form-group"><label>Correo electrónico</label><input type="email" id="reg-email" required></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Empresa / Organización</label><input type="text" id="reg-company" required></div>
+          <div class="form-group"><label>Cargo actual</label><input type="text" id="reg-position" required></div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>País</label>
+            <select id="reg-country" required>
+              <option value="">Seleccione...</option>
+              <option value="CR">Costa Rica</option><option value="MX">México</option>
+              <option value="GT">Guatemala</option><option value="SV">El Salvador</option>
+              <option value="HN">Honduras</option><option value="NI">Nicaragua</option>
+              <option value="PA">Panamá</option><option value="CO">Colombia</option>
+              <option value="PE">Perú</option><option value="EC">Ecuador</option>
+              <option value="CL">Chile</option><option value="AR">Argentina</option>
+              <option value="DO">República Dominicana</option><option value="PR">Puerto Rico</option>
+              <option value="UY">Uruguay</option><option value="PY">Paraguay</option>
+              <option value="BO">Bolivia</option><option value="VE">Venezuela</option>
+              <option value="OTHER">Otro</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Antigüedad en el cargo</label>
+            <select id="reg-tenure" required>
+              <option value="">Seleccione...</option>
+              <option value="<6m">Menos de 6 meses</option>
+              <option value="6m-1y">6 meses a 1 año</option>
+              <option value="1-3y">1 a 3 años</option>
+              <option value="3-5y">3 a 5 años</option>
+              <option value="5-10y">5 a 10 años</option>
+              <option value=">10y">Más de 10 años</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group"><label>Nivel organizacional</label>
+            <select id="reg-level" required>
+              <option value="">Seleccione...</option>
+              <option value="directivo">Directivo / C-Level</option>
+              <option value="gerencia">Gerencia</option>
+              <option value="jefatura">Jefatura / Coordinación</option>
+              <option value="profesional">Profesional / Especialista</option>
+              <option value="operativo">Operativo / Técnico</option>
+              <option value="asistente">Asistente / Auxiliar</option>
+            </select>
+          </div>
+          <div class="form-group"><label>Sector de la empresa</label>
+            <select id="reg-sector" required>
+              <option value="">Seleccione...</option>
+              <option value="servicios">Servicios</option>
+              <option value="tecnologia">Tecnología</option>
+              <option value="finanzas">Finanzas / Banca / Seguros</option>
+              <option value="salud">Salud</option>
+              <option value="educacion">Educación</option>
+              <option value="manufactura">Manufactura / Industria</option>
+              <option value="comercio">Comercio / Retail</option>
+              <option value="gobierno">Gobierno / Sector Público</option>
+              <option value="logistica">Logística / Transporte</option>
+              <option value="construccion">Construcción / Inmobiliario</option>
+              <option value="agro">Agroindustria</option>
+              <option value="otro">Otro</option>
+            </select>
+          </div>
+        </div>
+        <div class="btn-group">
+          <button type="button" class="btn btn-outline" onclick="showScreen('screen-consent')">Volver</button>
+          <button type="submit" class="btn btn-primary">Continuar</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCREEN: DISC Instructions -->
+  <div class="screen" id="screen-disc-instructions">
+    <div class="card">
+      <h1>Sección 1: Perfil Conductual DISC</h1>
+      <div class="alert alert-info"><strong>Instrucciones importantes — lea con atención</strong></div>
+      <p>A continuación encontrará <strong>28 grupos</strong> de cuatro frases cada uno. En cada grupo:</p>
+      <ol style="line-height:2">
+        <li><strong>Seleccione UNA frase</strong> que sea la <strong style="color:var(--sec)">MÁS parecida</strong> a cómo usted actúa normalmente en el trabajo.</li>
+        <li><strong>Seleccione UNA frase</strong> que sea la <strong style="color:var(--d-color)">MENOS parecida</strong> a cómo usted actúa normalmente en el trabajo.</li>
+      </ol>
+      <p>Las dos frases restantes quedan sin marcar.</p>
+      <div class="alert alert-warning"><strong>Importante:</strong> No hay respuestas correctas ni incorrectas. Piense en cómo usted ES realmente, no en cómo le gustaría ser. Responda con base en su comportamiento habitual en el trabajo.</div>
+      <p style="font-size:0.9em;color:var(--text-2)">Tiempo estimado: 10-15 minutos. No hay límite de tiempo, pero se recomienda no pensar demasiado cada respuesta — la primera impresión suele ser la más precisa.</p>
+      <div class="btn-group" style="justify-content:center">
+        <button class="btn btn-primary" onclick="startDISC()">Comenzar Sección 1</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN: DISC Test -->
+  <div class="screen" id="screen-disc-test">
+    <div class="no-print">
+      <div class="progress-text" id="disc-progress-text">Bloque 1 de 28</div>
+      <div class="progress-bar"><div class="progress-fill" id="disc-progress-fill" style="width:0%"></div></div>
+    </div>
+    <div class="card" id="disc-block-container"></div>
+    <div class="btn-group no-print" style="justify-content:space-between" id="disc-nav">
+      <button class="btn btn-outline" id="disc-prev-btn" onclick="discNav(-1)">Anterior</button>
+      <button class="btn btn-primary" id="disc-next-btn" onclick="discNav(1)">Siguiente</button>
+    </div>
+  </div>
+
+  <!-- SCREEN: Competency Instructions -->
+  <div class="screen" id="screen-comp-instructions">
+    <div class="card">
+      <h1>Sección 2: Competencias Organizacionales</h1>
+      <div class="alert alert-info"><strong>Instrucciones</strong></div>
+      <p>A continuación encontrará <strong>63 afirmaciones</strong> sobre comportamientos laborales, organizadas en 4 áreas.</p>
+      <p>Para cada afirmación, indique <strong>con qué frecuencia</strong> usted demuestra ese comportamiento en su trabajo actual:</p>
+      <table class="data" style="max-width:500px">
+        <tr><td style="font-weight:700;width:40px">1</td><td>Nunca o casi nunca</td></tr>
+        <tr><td style="font-weight:700">2</td><td>Pocas veces</td></tr>
+        <tr><td style="font-weight:700">3</td><td>Algunas veces</td></tr>
+        <tr><td style="font-weight:700">4</td><td>Frecuentemente</td></tr>
+        <tr><td style="font-weight:700">5</td><td>Siempre o casi siempre</td></tr>
+      </table>
+      <div class="alert alert-warning"><strong>Importante:</strong> Responda según lo que HACE, no lo que cree que debería hacer. Sea honesto — un perfil preciso es más útil que uno idealizado.</div>
+      <div class="btn-group" style="justify-content:center">
+        <button class="btn btn-primary" onclick="startCompetencies()">Comenzar Sección 2</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SCREEN: Competency Test -->
+  <div class="screen" id="screen-comp-test">
+    <div class="no-print">
+      <div class="progress-text" id="comp-progress-text">0 de 63 respondidos</div>
+      <div class="progress-bar"><div class="progress-fill" id="comp-progress-fill" style="width:0%"></div></div>
+    </div>
+    <div id="comp-items-container"></div>
+    <div class="btn-group no-print" style="justify-content:center;margin-top:24px">
+      <button class="btn btn-primary" id="comp-submit-btn" disabled onclick="submitCompetencies()">Finalizar evaluación</button>
+    </div>
+  </div>
+
+  <!-- SCREEN: Processing -->
+  <div class="screen" id="screen-processing">
+    <div class="card" style="text-align:center;padding:60px 32px">
+      <div class="spinner"></div>
+      <h2 style="border:none">Procesando sus resultados</h2>
+      <p class="subtitle" id="processing-text">Calculando perfil DISC...</p>
+    </div>
+  </div>
+
+  <!-- SCREEN: Report -->
+  <div class="screen" id="screen-report">
+    <div id="report-content"></div>
+    <div class="btn-group no-print" style="justify-content:center;margin-top:24px">
+      <button class="btn btn-primary" onclick="window.print()">Imprimir / Guardar PDF</button>
+      <button class="btn btn-secondary" onclick="downloadJSON()">Descargar datos (JSON)</button>
+      <button class="btn btn-outline" onclick="showScreen('screen-welcome')">Nueva evaluación</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const DISC_BLOCKS = [
+  {id:1,items:[
+    {dim:'D',text:'Asumo el liderazgo cuando nadie más lo hace'},
+    {dim:'I',text:'Genero un ambiente positivo en el equipo'},
+    {dim:'S',text:'Mantengo la calma en situaciones difíciles'},
+    {dim:'C',text:'Me aseguro de que todo esté bien documentado'}
+  ]},
+  {id:2,items:[
+    {dim:'D',text:'Busco superar las metas establecidas'},
+    {dim:'I',text:'Me resulta fácil hablar en público'},
+    {dim:'S',text:'Prefiero relaciones laborales duraderas'},
+    {dim:'C',text:'Analizo los datos antes de decidir'}
+  ]},
+  {id:3,items:[
+    {dim:'D',text:'Tomo decisiones rápidas bajo presión'},
+    {dim:'I',text:'Convenzo a otros con argumentos creativos'},
+    {dim:'S',text:'Colaboro sin buscar protagonismo'},
+    {dim:'C',text:'Detecto errores que otros pasan por alto'}
+  ]},
+  {id:4,items:[
+    {dim:'D',text:'Me motivan los retos difíciles'},
+    {dim:'I',text:'Conecto fácilmente con personas nuevas'},
+    {dim:'S',text:'Cumplo mis compromisos sin falta'},
+    {dim:'C',text:'Sigo las normas y procedimientos al pie'}
+  ]},
+  {id:5,items:[
+    {dim:'D',text:'Voy directo al punto en las reuniones'},
+    {dim:'I',text:'Hago que el trabajo sea más ameno'},
+    {dim:'S',text:'Apoyo a mis compañeros cuando lo necesitan'},
+    {dim:'C',text:'Verifico la calidad de cada entregable'}
+  ]},
+  {id:6,items:[
+    {dim:'D',text:'Exijo resultados claros al equipo'},
+    {dim:'I',text:'Motivo a otros a dar lo mejor de sí'},
+    {dim:'S',text:'Mantengo un ritmo de trabajo estable'},
+    {dim:'C',text:'Planifico cada paso antes de actuar'}
+  ]},
+  {id:7,items:[
+    {dim:'D',text:'No temo enfrentar conflictos necesarios'},
+    {dim:'I',text:'Comunico ideas de forma convincente'},
+    {dim:'S',text:'Me adapto a las necesidades del grupo'},
+    {dim:'C',text:'Organizo la información de manera lógica'}
+  ]},
+  {id:8,items:[
+    {dim:'D',text:'Prefiero liderar a seguir instrucciones'},
+    {dim:'I',text:'Celebro los logros del equipo abiertamente'},
+    {dim:'S',text:'Brindo un trato amable y constante'},
+    {dim:'C',text:'Respeto los tiempos y plazos establecidos'}
+  ]},
+  {id:9,items:[
+    {dim:'D',text:'Compito para ser el mejor en lo que hago'},
+    {dim:'I',text:'Genero confianza a través del diálogo'},
+    {dim:'S',text:'Soy la persona a quien acuden por apoyo'},
+    {dim:'C',text:'Trabajo con precisión y atención al detalle'}
+  ]},
+  {id:10,items:[
+    {dim:'D',text:'Asumo riesgos calculados por resultados'},
+    {dim:'I',text:'Presento ideas con entusiasmo y energía'},
+    {dim:'S',text:'Escucho con paciencia antes de opinar'},
+    {dim:'C',text:'Investigo a fondo antes de proponer algo'}
+  ]},
+  {id:11,items:[
+    {dim:'D',text:'Establezco prioridades con firmeza'},
+    {dim:'I',text:'Facilito la comunicación entre áreas'},
+    {dim:'S',text:'Mantengo la armonía en el equipo'},
+    {dim:'C',text:'Cuestiono lo que no tiene sustento'}
+  ]},
+  {id:12,items:[
+    {dim:'D',text:'Me impaciento cuando las cosas van lento'},
+    {dim:'I',text:'Disfruto participar en eventos sociales'},
+    {dim:'S',text:'Prefiero la estabilidad al cambio constante'},
+    {dim:'C',text:'Archivo y organizo todo sistemáticamente'}
+  ]},
+  {id:13,items:[
+    {dim:'D',text:'Defiendo mi posición con determinación'},
+    {dim:'I',text:'Resuelvo tensiones con sentido del humor'},
+    {dim:'S',text:'Trabajo mejor en ambientes predecibles'},
+    {dim:'C',text:'Reviso los procedimientos para mejorarlos'}
+  ]},
+  {id:14,items:[
+    {dim:'D',text:'Busco nuevas formas de crecer profesionalmente'},
+    {dim:'I',text:'Inspiro a otros con una visión positiva'},
+    {dim:'S',text:'Ofrezco ayuda sin que me lo pidan'},
+    {dim:'C',text:'Documento cada proceso con claridad'}
+  ]},
+  {id:15,items:[
+    {dim:'D',text:'Tomo la iniciativa sin esperar aprobación'},
+    {dim:'I',text:'Creo redes de contacto con facilidad'},
+    {dim:'S',text:'Soy constante en mis hábitos de trabajo'},
+    {dim:'C',text:'Evalúo los pros y contras de cada opción'}
+  ]},
+  {id:16,items:[
+    {dim:'D',text:'Enfrento los problemas de manera directa'},
+    {dim:'I',text:'Negocio buscando que todos ganen'},
+    {dim:'S',text:'Priorizo las relaciones sobre las tareas'},
+    {dim:'C',text:'Detecto inconsistencias en los reportes'}
+  ]},
+  {id:17,items:[
+    {dim:'D',text:'Me responsabilizo de resultados ambiciosos'},
+    {dim:'I',text:'Adapto mi mensaje según la audiencia'},
+    {dim:'S',text:'Me siento cómodo con rutinas establecidas'},
+    {dim:'C',text:'Mantengo estándares altos de calidad'}
+  ]},
+  {id:18,items:[
+    {dim:'D',text:'Delego tareas para enfocarme en lo estratégico'},
+    {dim:'I',text:'Reconozco públicamente el esfuerzo ajeno'},
+    {dim:'S',text:'Trabajo en equipo sin generar conflictos'},
+    {dim:'C',text:'Cumplo con las regulaciones sin excepción'}
+  ]},
+  {id:19,items:[
+    {dim:'D',text:'Cuestiono el statu quo cuando no funciona'},
+    {dim:'I',text:'Transformo ideas complejas en algo sencillo'},
+    {dim:'S',text:'Prefiero consensuar antes de avanzar'},
+    {dim:'C',text:'Baso mis decisiones en evidencia concreta'}
+  ]},
+  {id:20,items:[
+    {dim:'D',text:'Me energizo con la competencia sana'},
+    {dim:'I',text:'Uso historias para explicar mis ideas'},
+    {dim:'S',text:'Soy un punto de estabilidad para mi equipo'},
+    {dim:'C',text:'Identifico riesgos antes de que ocurran'}
+  ]},
+  {id:21,items:[
+    {dim:'D',text:'Establezco reglas claras en mis proyectos'},
+    {dim:'I',text:'Mantengo una actitud optimista contagiosa'},
+    {dim:'S',text:'Acepto cambios cuando el equipo lo decide'},
+    {dim:'C',text:'Diseño sistemas para evitar errores'}
+  ]},
+  {id:22,items:[
+    {dim:'D',text:'No me detengo ante la primera dificultad'},
+    {dim:'I',text:'Genero empatía rápidamente con los demás'},
+    {dim:'S',text:'Doy seguimiento constante a mis tareas'},
+    {dim:'C',text:'Comparo alternativas con criterios objetivos'}
+  ]},
+  {id:23,items:[
+    {dim:'D',text:'Pido cuentas a quienes me reportan'},
+    {dim:'I',text:'Propongo soluciones creativas a problemas'},
+    {dim:'S',text:'Me preocupo por el bienestar del equipo'},
+    {dim:'C',text:'Leo las instrucciones antes de empezar'}
+  ]},
+  {id:24,items:[
+    {dim:'D',text:'Prefiero resultados a procesos perfectos'},
+    {dim:'I',text:'Hago que las presentaciones sean memorables'},
+    {dim:'S',text:'Ofrezco retroalimentación de forma respetuosa'},
+    {dim:'C',text:'Reviso mi trabajo más de una vez'}
+  ]},
+  {id:25,items:[
+    {dim:'D',text:'Marco la dirección en proyectos nuevos'},
+    {dim:'I',text:'Encuentro el lado positivo en los contratiempos'},
+    {dim:'S',text:'Me comprometo con las decisiones del grupo'},
+    {dim:'C',text:'Valoro la exactitud por encima de la rapidez'}
+  ]},
+  {id:26,items:[
+    {dim:'D',text:'Negocio con firmeza para lograr mis objetivos'},
+    {dim:'I',text:'Integro rápidamente a personas nuevas al equipo'},
+    {dim:'S',text:'Mantengo la lealtad incluso en tiempos difíciles'},
+    {dim:'C',text:'Aplico metodologías probadas en mi trabajo'}
+  ]},
+  {id:27,items:[
+    {dim:'D',text:'Gestiono varios proyectos a la vez sin problema'},
+    {dim:'I',text:'Comparto el crédito con generosidad'},
+    {dim:'S',text:'Trabajo a un paso firme y sostenido'},
+    {dim:'C',text:'Reviso las cifras hasta estar completamente seguro'}
+  ]},
+  {id:28,items:[
+    {dim:'D',text:'Me motiva tener autonomía y control'},
+    {dim:'I',text:'Disfruto ser el centro de atención en reuniones'},
+    {dim:'S',text:'Valoro la armonía más que tener la razón'},
+    {dim:'C',text:'Pregunto "¿y si falla?" antes de aprobar algo'}
+  ]}
+];
+
+const COMP_CLUSTERS = [
+  {name:'Liderazgo y Visión',competencies:[
+    {id:'PE',name:'Pensamiento Estratégico',items:[
+      'Identifico tendencias del entorno que afectan a mi área de trabajo',
+      'Relaciono las tareas diarias con los objetivos estratégicos de largo plazo',
+      'Anticipo escenarios futuros y preparo planes de contingencia',
+      'Propongo cambios que generan valor para la organización',
+      'Evalúo el impacto de mis decisiones más allá de mi área inmediata'
+    ]},
+    {id:'LP',name:'Liderazgo de Personas',items:[
+      'Doy dirección clara a mi equipo sobre lo que se espera de cada uno',
+      'Desarrollo el potencial de las personas a mi cargo o con quienes colaboro',
+      'Asigno responsabilidades según las fortalezas de cada persona',
+      'Inspiro a otros a comprometerse con los objetivos del equipo',
+      'Brindo retroalimentación oportuna y constructiva sobre el desempeño'
+    ]},
+    {id:'TD',name:'Toma de Decisiones',items:[
+      'Tomo decisiones oportunas, incluso con información incompleta',
+      'Considero las consecuencias a corto y largo plazo antes de actuar',
+      'Involucro a las personas adecuadas en las decisiones importantes',
+      'Asumo la responsabilidad de mis decisiones y sus resultados',
+      'Aprendo de las decisiones que no dieron el resultado esperado'
+    ]}
+  ]},
+  {name:'Ejecución y Productividad',competencies:[
+    {id:'OR',name:'Orientación a Resultados',items:[
+      'Establezco metas medibles y alcanzables para mi trabajo',
+      'Mantengo el enfoque hasta lograr los resultados esperados',
+      'Busco formas de hacer más con los recursos disponibles',
+      'Supero obstáculos sin perder de vista el objetivo final',
+      'Mido mi progreso regularmente y ajusto mi plan según sea necesario'
+    ]},
+    {id:'OP',name:'Organización y Planificación',items:[
+      'Priorizo mis actividades según su impacto y urgencia',
+      'Establezco plazos realistas y los cumplo consistentemente',
+      'Coordino recursos y tiempos de manera eficiente',
+      'Mantengo orden en mi información y documentos de trabajo',
+      'Anticipo necesidades antes de que se conviertan en urgencias'
+    ]},
+    {id:'CM',name:'Calidad y Mejora Continua',items:[
+      'Reviso mi trabajo para asegurar que cumple los estándares de calidad',
+      'Identifico oportunidades de mejora en los procesos actuales',
+      'Implemento correcciones de manera inmediata cuando detecto un error',
+      'Adopto mejores prácticas de mi industria o profesión',
+      'Propongo innovaciones que simplifican el trabajo del equipo'
+    ]}
+  ]},
+  {name:'Relaciones y Comunicación',competencies:[
+    {id:'CE',name:'Comunicación Efectiva',items:[
+      'Expreso mis ideas con claridad y orden lógico',
+      'Adapto mi comunicación al nivel y contexto de mi interlocutor',
+      'Escucho activamente y valido que entendí correctamente',
+      'Comunico información difícil o sensible de manera respetuosa',
+      'Verifico que mi mensaje fue comprendido antes de continuar'
+    ]},
+    {id:'TC',name:'Trabajo Colaborativo',items:[
+      'Comparto información y recursos relevantes con mis compañeros',
+      'Busco consenso cuando hay opiniones diferentes en el equipo',
+      'Aporto al equipo más allá de mis responsabilidades individuales',
+      'Reconozco y valoro las contribuciones de los demás',
+      'Construyo relaciones profesionales basadas en la confianza mutua'
+    ]},
+    {id:'OC',name:'Orientación al Cliente',items:[
+      'Identifico las necesidades del cliente interno o externo con precisión',
+      'Respondo con prontitud a las solicitudes que recibo',
+      'Busco superar las expectativas en el servicio que brindo',
+      'Manejo las quejas y reclamos como oportunidades de mejora',
+      'Doy seguimiento hasta asegurar la satisfacción completa del cliente'
+    ]}
+  ]},
+  {name:'Desarrollo y Adaptación',competencies:[
+    {id:'PA',name:'Pensamiento Analítico',items:[
+      'Recopilo datos relevantes antes de emitir un juicio o conclusión',
+      'Identifico la causa raíz de los problemas, no solo los síntomas',
+      'Comparo diferentes alternativas de solución con criterios claros',
+      'Separo hechos de opiniones y suposiciones en mi análisis',
+      'Presento conclusiones respaldadas con evidencia verificable'
+    ]},
+    {id:'AD',name:'Adaptabilidad',items:[
+      'Me ajusto rápidamente a cambios en las prioridades del trabajo',
+      'Mantengo mi nivel de desempeño en situaciones de incertidumbre',
+      'Estoy abierto a incorporar nuevas formas de hacer las cosas',
+      'Manejo la frustración de manera constructiva sin afectar al equipo',
+      'Aprendo de los errores y modifico mi comportamiento para mejorar'
+    ]},
+    {id:'IE',name:'Integridad y Ética',items:[
+      'Actúo de forma congruente con lo que digo y prometo',
+      'Manejo información confidencial con absoluta discreción',
+      'Reconozco mis errores abiertamente sin buscar excusas',
+      'Tomo decisiones éticas incluso cuando no me benefician personalmente',
+      'Cumplo mis compromisos en tiempo y forma, sin necesidad de seguimiento'
+    ]}
+  ]}
+];
+
+const CONSISTENCY_ITEMS = [
+  {insertAfter:20,text:'Jamás he cometido un error en mi trabajo'},
+  {insertAfter:40,text:'Siempre estoy de acuerdo con todas las decisiones de mis superiores'},
+  {insertAfter:55,text:'Nunca he sentido frustración alguna en el trabajo'}
+];
+
+const DISC_NORMS = {
+  D:{mean:1.5,sd:5.5},I:{mean:2.5,sd:5.0},S:{mean:2.0,sd:5.0},C:{mean:-0.5,sd:5.5}
+};
+const COMP_NORMS = {mean:18.0,sd:3.5};
+
+const DISC_PROFILES = {
+  D:{
+    name:'Dominancia',color:'var(--d-color)',
+    high:'Orientado a resultados, decidido, competitivo y directo. Busca el control de las situaciones y se enfoca en resolver problemas de manera rápida y eficiente. Prefiere la acción sobre la deliberación prolongada.',
+    traits:['Toma de decisiones rápida','Orientación a resultados','Asertividad','Independencia','Competitividad'],
+    leadership:'Liderazgo directivo y orientado a resultados. Establece expectativas claras, toma decisiones rápidas y empuja al equipo hacia las metas. Puede ser percibido como demandante pero genera resultados.',
+    stress:'Bajo presión tiende a volverse más controlador, impaciente y confrontativo. Puede tomar decisiones precipitadas y descuidar las relaciones interpersonales.',
+    motivators:'Retos, autonomía, autoridad, resultados tangibles, competencia, oportunidades de avance.',
+    environment:'Entorno dinámico con autonomía para decidir, metas claras y desafiantes, mínima burocracia y reconocimiento por resultados.',
+    comm:'Comunicación directa, breve y orientada a la acción. Valora la eficiencia sobre la cortesía excesiva. Prefiere hechos y resultados sobre emociones.'
+  },
+  I:{
+    name:'Influencia',color:'var(--i-color)',
+    high:'Sociable, entusiasta, persuasivo y optimista. Se conecta fácilmente con las personas y genera un ambiente positivo. Se motiva a través del reconocimiento social y las relaciones interpersonales.',
+    traits:['Comunicación persuasiva','Sociabilidad','Entusiasmo','Creatividad','Capacidad de influencia'],
+    leadership:'Liderazgo inspirador y motivacional. Genera compromiso a través del carisma, la visión positiva y el reconocimiento. Crea ambientes de trabajo agradables y fomenta la colaboración.',
+    stress:'Bajo presión puede volverse desorganizado, hablar sin filtro, prometer más de lo que puede cumplir y evitar confrontaciones necesarias.',
+    motivators:'Reconocimiento social, trabajo en equipo, diversión, creatividad, libertad de expresión, popularidad.',
+    environment:'Entorno social y colaborativo, con variedad de actividades, reconocimiento frecuente, oportunidades de interacción y mínimas tareas repetitivas.',
+    comm:'Comunicación expresiva, entusiasta y orientada a las personas. Usa historias y ejemplos. Prefiere el diálogo al escrito y valora la conexión emocional.'
+  },
+  S:{
+    name:'Estabilidad',color:'var(--s-color)',
+    high:'Paciente, confiable, leal y cooperativo. Valora la armonía y la consistencia. Es el pilar del equipo — aquel a quien todos acuden por apoyo. Prefiere ambientes predecibles y relaciones duraderas.',
+    traits:['Confiabilidad','Paciencia','Escucha activa','Lealtad','Trabajo en equipo'],
+    leadership:'Liderazgo servicial y participativo. Lidera con el ejemplo, escucha a su equipo, busca consenso y prioriza el bienestar de las personas. Genera ambientes de alta confianza.',
+    stress:'Bajo presión puede volverse pasivo, resistirse al cambio, evitar conflictos necesarios y acumular resentimiento sin expresarlo.',
+    motivators:'Estabilidad, seguridad, relaciones significativas, reconocimiento sincero, trabajo en equipo, predictibilidad.',
+    environment:'Entorno estable con roles claros, relaciones de largo plazo, cambios graduales, trabajo colaborativo y un liderazgo respetuoso.',
+    comm:'Comunicación cálida, paciente y empática. Escucha más de lo que habla. Prefiere conversaciones uno a uno y valora la sinceridad y la consistencia.'
+  },
+  C:{
+    name:'Cumplimiento',color:'var(--c-color)',
+    high:'Preciso, analítico, sistemático y orientado a la calidad. Busca la excelencia en cada detalle y basa sus decisiones en datos y evidencia. Valora los estándares, las normas y los procesos bien definidos.',
+    traits:['Pensamiento analítico','Atención al detalle','Rigor metodológico','Precisión','Pensamiento crítico'],
+    leadership:'Liderazgo técnico y basado en evidencia. Establece estándares de calidad, diseña procesos eficientes y toma decisiones fundamentadas. Genera credibilidad a través de su expertise.',
+    stress:'Bajo presión puede volverse excesivamente crítico, perfeccionista al punto de la parálisis, defensivo ante el cuestionamiento y aislarse del equipo.',
+    motivators:'Calidad, precisión, lógica, estructura, reconocimiento por expertise, tiempo para análisis, estándares claros.',
+    environment:'Entorno estructurado con estándares claros, tiempo para análisis, acceso a datos, procesos definidos y reconocimiento por la calidad del trabajo.',
+    comm:'Comunicación precisa, formal y basada en datos. Prefiere la comunicación escrita con evidencia. Valora la exactitud sobre la velocidad y espera respuestas fundamentadas.'
+  }
+};
+
+let state = {
+  participant:{},
+  discBlock:0,
+  discResponses:new Array(28).fill(null).map(()=>({most:null,least:null})),
+  compResponses:{},
+  consistencyResponses:{},
+  startTime:null,
+  discStartTime:null,
+  compStartTime:null,
+  results:null
+};
+
+function showScreen(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+function handleRegistration(e){
+  e.preventDefault();
+  state.participant = {
+    name:document.getElementById('reg-name').value,
+    email:document.getElementById('reg-email').value,
+    company:document.getElementById('reg-company').value,
+    position:document.getElementById('reg-position').value,
+    country:document.getElementById('reg-country').value,
+    tenure:document.getElementById('reg-tenure').value,
+    level:document.getElementById('reg-level').value,
+    sector:document.getElementById('reg-sector').value
+  };
+  state.startTime = Date.now();
+  showScreen('screen-disc-instructions');
+  return false;
+}
+
+function startDISC(){
+  state.discStartTime = Date.now();
+  state.discBlock = 0;
+  renderDISCBlock();
+  showScreen('screen-disc-test');
+}
+
+function renderDISCBlock(){
+  const idx = state.discBlock;
+  const block = DISC_BLOCKS[idx];
+  const resp = state.discResponses[idx];
+  const shuffled = [...block.items].sort(()=>Math.random()-0.5);
+
+  let html = `<h3>Bloque ${idx+1} de 28</h3>`;
+  html += `<div class="disc-instruction">Seleccione la frase <strong style="color:var(--sec)">MÁS</strong> y la <strong style="color:var(--d-color)">MENOS</strong> parecida a usted</div>`;
+  html += `<div class="disc-options">`;
+
+  shuffled.forEach((item,i)=>{
+    const itemKey = item.dim;
+    let cls = 'disc-option';
+    let tag = '';
+    if(resp.most === itemKey){cls+=' selected-most';tag='<span class="label-tag most">Más</span>';}
+    if(resp.least === itemKey){cls+=' selected-least';tag='<span class="label-tag least">Menos</span>';}
+    html += `<div class="${cls}" data-dim="${itemKey}" onclick="handleDISCClick(${idx},'${itemKey}')">
+      ${tag}<span class="text">${item.text}</span></div>`;
+  });
+  html += `</div>`;
+
+  document.getElementById('disc-block-container').innerHTML = html;
+  document.getElementById('disc-progress-text').textContent = `Bloque ${idx+1} de 28`;
+  document.getElementById('disc-progress-fill').style.width = ((idx+1)/28*100)+'%';
+
+  document.getElementById('disc-prev-btn').disabled = idx === 0;
+  const isComplete = resp.most !== null && resp.least !== null;
+  const isLast = idx === 27;
+  document.getElementById('disc-next-btn').textContent = isLast ? 'Finalizar Sección 1' : 'Siguiente';
+  document.getElementById('disc-next-btn').disabled = !isComplete;
+}
+
+function handleDISCClick(blockIdx, dim){
+  const resp = state.discResponses[blockIdx];
+  if(resp.most === dim){resp.most = null;}
+  else if(resp.least === dim){resp.least = null;}
+  else if(resp.most === null){resp.most = dim;}
+  else if(resp.least === null && dim !== resp.most){resp.least = dim;}
+  else {
+    if(dim !== resp.least) resp.most = dim;
+  }
+  renderDISCBlock();
+}
+
+function discNav(dir){
+  const idx = state.discBlock;
+  const resp = state.discResponses[idx];
+  if(dir === 1){
+    if(resp.most === null || resp.least === null) return;
+    if(idx === 27){
+      showScreen('screen-comp-instructions');
+      return;
+    }
+    state.discBlock = idx + 1;
+  } else {
+    if(idx === 0) return;
+    state.discBlock = idx - 1;
+  }
+  renderDISCBlock();
+}
+
+function startCompetencies(){
+  state.compStartTime = Date.now();
+  renderCompetencyItems();
+  showScreen('screen-comp-test');
+}
+
+function renderCompetencyItems(){
+  let html = '';
+  let globalIdx = 0;
+  let consistencyIdx = 0;
+
+  COMP_CLUSTERS.forEach(cluster=>{
+    html += `<div class="cluster-header">${cluster.name}</div>`;
+    cluster.competencies.forEach(comp=>{
+      html += `<div class="card"><h3>${comp.name}</h3>`;
+      comp.items.forEach((item,iIdx)=>{
+        globalIdx++;
+        html += renderLikertItem(globalIdx, item, `comp_${comp.id}_${iIdx}`);
+        if(consistencyIdx < CONSISTENCY_ITEMS.length && globalIdx === CONSISTENCY_ITEMS[consistencyIdx].insertAfter){
+          globalIdx++;
+          html += renderLikertItem(globalIdx, CONSISTENCY_ITEMS[consistencyIdx].text, `cc_${consistencyIdx}`);
+          consistencyIdx++;
+        }
+      });
+      html += `</div>`;
+    });
+  });
+
+  document.getElementById('comp-items-container').innerHTML = html;
+}
+
+function renderLikertItem(num, text, key){
+  const labels = ['Nunca o casi nunca','Pocas veces','Algunas veces','Frecuentemente','Siempre o casi siempre'];
+  let html = `<div class="likert-item"><div class="likert-text">${num}. ${text}</div><div class="likert-scale">`;
+  for(let v=1;v<=5;v++){
+    const sel = (state.compResponses[key] === v) ? ' selected' : '';
+    html += `<button type="button" class="likert-btn${sel}" onclick="handleLikert('${key}',${v},this)">${v}<br><span style="font-size:0.7em">${labels[v-1]}</span></button>`;
+  }
+  html += `</div></div>`;
+  return html;
+}
+
+function handleLikert(key, value, btn){
+  if(key.startsWith('cc_')) state.consistencyResponses[key] = value;
+  else state.compResponses[key] = value;
+
+  const row = btn.parentElement;
+  row.querySelectorAll('.likert-btn').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+
+  updateCompProgress();
+}
+
+function updateCompProgress(){
+  const totalComp = 60;
+  const totalCC = 3;
+  const answered = Object.keys(state.compResponses).length + Object.keys(state.consistencyResponses).length;
+  const total = totalComp + totalCC;
+  const pct = Math.round(answered/total*100);
+
+  document.getElementById('comp-progress-text').textContent = `${answered} de ${total} respondidos`;
+  document.getElementById('comp-progress-fill').style.width = pct+'%';
+  document.getElementById('comp-submit-btn').disabled = answered < total;
+}
+
+function submitCompetencies(){
+  const totalComp = 60;
+  const totalCC = 3;
+  const answered = Object.keys(state.compResponses).length + Object.keys(state.consistencyResponses).length;
+  if(answered < totalComp + totalCC){
+    alert('Por favor responda todas las preguntas antes de continuar.');
+    return;
+  }
+
+  showScreen('screen-processing');
+  const msgs = ['Calculando perfil DISC...','Procesando competencias...','Generando baremos LATAM...','Integrando perfil de desempeño...','Preparando su reporte...'];
+  let mi = 0;
+  const iv = setInterval(()=>{
+    mi++;
+    if(mi < msgs.length) document.getElementById('processing-text').textContent = msgs[mi];
+    else {clearInterval(iv);calculateResults();}
+  }, 600);
+}
+
+function normalCDF(x){
+  const t = 1/(1+0.2316419*Math.abs(x));
+  const d = 0.3989422804*Math.exp(-x*x/2);
+  const p = d*t*(0.3193815+t*(-0.3565638+t*(1.781478+t*(-1.821256+t*1.330274))));
+  return x > 0 ? 1-p : p;
+}
+
+function rawToPercentile(raw,mean,sd){
+  const z = (raw-mean)/sd;
+  return Math.round(Math.min(99,Math.max(1,normalCDF(z)*100)));
+}
+
+function rawToTScore(raw,mean,sd){
+  return Math.round(50+10*(raw-mean)/sd);
+}
+
+function calculateResults(){
+  const discM = {D:0,I:0,S:0,C:0};
+  const discL = {D:0,I:0,S:0,C:0};
+
+  state.discResponses.forEach(r=>{
+    if(r.most) discM[r.most]++;
+    if(r.least) discL[r.least]++;
+  });
+
+  const discDiff = {};
+  const discPct = {};
+  const discT = {};
+  ['D','I','S','C'].forEach(d=>{
+    discDiff[d] = discM[d] - discL[d];
+    discPct[d] = rawToPercentile(discDiff[d], DISC_NORMS[d].mean, DISC_NORMS[d].sd);
+    discT[d] = rawToTScore(discDiff[d], DISC_NORMS[d].mean, DISC_NORMS[d].sd);
+  });
+
+  const dimArr = ['D','I','S','C'];
+  const sorted = dimArr.slice().sort((a,b)=>discPct[b]-discPct[a]);
+  const primaryDim = sorted[0];
+  const secondaryDim = sorted[1];
+  let profileType = primaryDim;
+  if(discPct[secondaryDim] >= 55) profileType = primaryDim + secondaryDim;
+
+  const compScores = {};
+  COMP_CLUSTERS.forEach(cluster=>{
+    cluster.competencies.forEach(comp=>{
+      let sum = 0;
+      for(let i=0;i<5;i++){
+        const key = `comp_${comp.id}_${i}`;
+        sum += state.compResponses[key] || 3;
+      }
+      const tScore = rawToTScore(sum, COMP_NORMS.mean, COMP_NORMS.sd);
+      const pct = rawToPercentile(sum, COMP_NORMS.mean, COMP_NORMS.sd);
+      let level;
+      if(tScore < 35) level = 'Crítico';
+      else if(tScore < 45) level = 'En Desarrollo';
+      else if(tScore < 55) level = 'Competente';
+      else if(tScore < 65) level = 'Avanzado';
+      else level = 'Destacado';
+      compScores[comp.id] = {name:comp.name,raw:sum,tScore,percentile:pct,level};
+    });
+  });
+
+  let consistencyScore = 0;
+  Object.values(state.consistencyResponses).forEach(v=>{if(v>=4)consistencyScore++;});
+  let consistencyFlag = consistencyScore >= 2 ? 'Precaución: posible sesgo de deseabilidad social' : 'Adecuado';
+
+  const endTime = Date.now();
+  const totalMinutes = Math.round((endTime - state.startTime)/60000);
+  const discMinutes = Math.round((state.compStartTime - state.discStartTime)/60000);
+  const compMinutes = Math.round((endTime - state.compStartTime)/60000);
+
+  state.results = {
+    disc:{most:discM,least:discL,diff:discDiff,percentiles:discPct,tScores:discT,primary:primaryDim,secondary:secondaryDim,profileType},
+    competencies:compScores,
+    consistency:{score:consistencyScore,flag:consistencyFlag},
+    timing:{total:totalMinutes,disc:discMinutes,comp:compMinutes},
+    date:new Date().toISOString().split('T')[0]
+  };
+
+  generateReport();
+}
+
+function generateReport(){
+  const r = state.results;
+  const p = state.participant;
+  const d = r.disc;
+  const countryNames = {CR:'Costa Rica',MX:'México',GT:'Guatemala',SV:'El Salvador',HN:'Honduras',NI:'Nicaragua',PA:'Panamá',CO:'Colombia',PE:'Perú',EC:'Ecuador',CL:'Chile',AR:'Argentina',DO:'Rep. Dominicana',PR:'Puerto Rico',UY:'Uruguay',PY:'Paraguay',BO:'Bolivia',VE:'Venezuela',OTHER:'Otro'};
+  const levelNames = {directivo:'Directivo / C-Level',gerencia:'Gerencia',jefatura:'Jefatura / Coordinación',profesional:'Profesional / Especialista',operativo:'Operativo / Técnico',asistente:'Asistente / Auxiliar'};
+
+  let html = '';
+
+  // Header
+  html += `<div class="card" style="text-align:center;border-top:4px solid var(--pri)">
+    <div style="font-size:1.6em;font-weight:800;color:var(--pri)">GTI</div>
+    <div style="font-size:0.85em;color:var(--text-2);margin-bottom:16px">Gestión del Talento e Innovación</div>
+    <h1 style="font-size:1.5em">Reporte de Evaluación Integral de Desempeño</h1>
+    <p class="subtitle">DISC + Competencias Organizacionales</p>
+    <table class="data" style="max-width:500px;margin:16px auto;text-align:left">
+      <tr><td style="font-weight:600;width:40%">Evaluado</td><td>${p.name}</td></tr>
+      <tr><td style="font-weight:600">Empresa</td><td>${p.company}</td></tr>
+      <tr><td style="font-weight:600">Cargo</td><td>${p.position}</td></tr>
+      <tr><td style="font-weight:600">Nivel</td><td>${levelNames[p.level]||p.level}</td></tr>
+      <tr><td style="font-weight:600">País</td><td>${countryNames[p.country]||p.country}</td></tr>
+      <tr><td style="font-weight:600">Fecha</td><td>${r.date}</td></tr>
+      <tr><td style="font-weight:600">Duración</td><td>${r.timing.total} minutos</td></tr>
+    </table>
+    ${r.consistency.score >= 2 ? '<div class="alert alert-warning">'+r.consistency.flag+'</div>' : ''}
+  </div>`;
+
+  // Executive Summary
+  const prof = DISC_PROFILES[d.primary];
+  const prof2 = DISC_PROFILES[d.secondary];
+  const compArr = Object.values(r.competencies);
+  const strengths = compArr.filter(c=>c.tScore>=55).sort((a,b)=>b.tScore-a.tScore);
+  const gaps = compArr.filter(c=>c.tScore<45).sort((a,b)=>a.tScore-b.tScore);
+
+  html += `<div class="card">
+    <h2>Resumen Ejecutivo</h2>
+    <p><strong>${p.name}</strong> presenta un perfil conductual predominante <strong>${prof.name}</strong>${d.profileType.length>1?' con tendencia <strong>'+prof2.name+'</strong>':''}, lo que indica que ${prof.high}</p>
+    ${strengths.length?`<p><strong>Competencias destacadas:</strong> ${strengths.slice(0,3).map(s=>s.name).join(', ')}.</p>`:''}
+    ${gaps.length?`<p><strong>Áreas de desarrollo prioritarias:</strong> ${gaps.slice(0,3).map(g=>g.name).join(', ')}.</p>`:''}
+  </div>`;
+
+  // DISC Profile
+  html += `<div class="card">
+    <h2>Perfil Conductual DISC</h2>
+    <div class="result-grid">
+      ${['D','I','S','C'].map(dim=>{
+        const dp = DISC_PROFILES[dim];
+        const bgAlpha = dim==='D'?'rgba(198,40,40,0.1)':dim==='I'?'rgba(249,168,37,0.12)':dim==='S'?'rgba(46,125,50,0.1)':'rgba(21,101,192,0.1)';
+        return `<div class="result-card" style="background:${bgAlpha}">
+          <div class="score" style="color:${dp.color}">${d.percentiles[dim]}</div>
+          <div class="label" style="color:${dp.color}">${dp.name}</div>
+          <div class="pct">Percentil ${d.percentiles[dim]} | T=${d.tScores[dim]}</div>
+        </div>`;
+      }).join('')}
+    </div>
+    <div class="chart-container">${generateDISCRadar(d)}</div>
+    <h3>Puntajes detallados</h3>
+    <table class="data">
+      <tr><th>Dimensión</th><th>Más (+)</th><th>Menos (-)</th><th>Diferencia</th><th>Percentil</th><th>T-Score</th></tr>
+      ${['D','I','S','C'].map(dim=>`<tr>
+        <td><span class="badge badge-${dim.toLowerCase()}">${dim}</span> ${DISC_PROFILES[dim].name}</td>
+        <td>${d.most[dim]}</td><td>${d.least[dim]}</td><td>${d.diff[dim]>0?'+':''}${d.diff[dim]}</td>
+        <td><strong>${d.percentiles[dim]}</strong></td><td>${d.tScores[dim]}</td>
+      </tr>`).join('')}
+    </table>
+  </div>`;
+
+  // DISC Interpretation
+  html += `<div class="card">
+    <h2>Interpretación del Perfil DISC</h2>
+    <h3>Estilo principal: ${prof.name} ${d.profileType.length>1?'/ '+prof2.name:''}</h3>
+    <p>${prof.high}</p>
+
+    <h3>Fortalezas conductuales</h3>
+    <ul>${prof.traits.map(t=>`<li>${t}</li>`).join('')}</ul>
+
+    <h3>Estilo de liderazgo</h3>
+    <p>${prof.leadership}</p>
+
+    <h3>Comportamiento bajo presión</h3>
+    <p>${prof.stress}</p>
+
+    <h3>Motivadores clave</h3>
+    <p>${prof.motivators}</p>
+
+    <h3>Entorno de trabajo ideal</h3>
+    <p>${prof.environment}</p>
+
+    <h3>Estilo de comunicación</h3>
+    <p>${prof.comm}</p>
+    ${d.profileType.length>1?`
+    <h3>Influencia secundaria: ${prof2.name}</h3>
+    <p>La tendencia ${prof2.name} complementa el estilo principal aportando: ${prof2.traits.slice(0,3).join(', ')}. Esto permite que ${p.name} también muestre capacidad para ${prof2.high.toLowerCase().substring(0,prof2.high.indexOf('.')+1)}</p>
+    `:''}
+  </div>`;
+
+  // Competency Profile
+  html += `<div class="card">
+    <h2>Perfil de Competencias Organizacionales</h2>
+    <div class="chart-container">${generateCompRadar(r.competencies)}</div>`;
+
+  COMP_CLUSTERS.forEach(cluster=>{
+    html += `<h3>${cluster.name}</h3>`;
+    cluster.competencies.forEach(comp=>{
+      const sc = r.competencies[comp.id];
+      const levelClass = sc.level==='Crítico'?'critico':sc.level==='En Desarrollo'?'desarrollo':sc.level==='Competente'?'competente':sc.level==='Avanzado'?'avanzado':'destacado';
+      const barColor = sc.level==='Crítico'?'#C62828':sc.level==='En Desarrollo'?'#E65100':sc.level==='Competente'?'#1565C0':sc.level==='Avanzado'?'#2E7D32':'#6A1B9A';
+      const barWidth = Math.max(5,Math.min(100,(sc.tScore/80)*100));
+      html += `<div class="comp-bar">
+        <span class="name">${sc.name}</span>
+        <div class="bar-bg"><div class="bar-fill" style="width:${barWidth}%;background:${barColor}"></div></div>
+        <span class="bar-val">T=${sc.tScore}</span>
+        <span class="level-tag level-${levelClass}">${sc.level}</span>
+      </div>`;
+    });
+  });
+
+  html += `<h3>Tabla de resultados por competencia</h3>
+    <table class="data">
+      <tr><th>Competencia</th><th>Puntaje Bruto</th><th>T-Score</th><th>Percentil</th><th>Nivel</th></tr>
+      ${Object.values(r.competencies).map(c=>{
+        const lc = c.level==='Crítico'?'critico':c.level==='En Desarrollo'?'desarrollo':c.level==='Competente'?'competente':c.level==='Avanzado'?'avanzado':'destacado';
+        return `<tr><td>${c.name}</td><td>${c.raw}/25</td><td>${c.tScore}</td><td>${c.percentile}</td><td><span class="level-tag level-${lc}">${c.level}</span></td></tr>`;
+      }).join('')}
+    </table>
+  </div>`;
+
+  // Performance Integration
+  html += `<div class="card">
+    <h2>Integración DISC + Competencias: Perfil de Desempeño</h2>
+    ${generatePerformanceIntegration(d, r.competencies, p)}
+  </div>`;
+
+  // Recommendations
+  html += `<div class="card">
+    <h2>Recomendaciones de Desarrollo</h2>
+    ${generateRecommendations(d, r.competencies, p)}
+  </div>`;
+
+  // Technical Sheet
+  html += `<div class="card ficha-tecnica">
+    <h2>Ficha Técnica del Instrumento</h2>
+    <table class="data">
+      <tr><td style="width:35%;font-weight:600">Instrumento</td><td>Evaluación Integral de Desempeño GTI — DISC + Competencias v1.0</td></tr>
+      <tr><td style="font-weight:600">Modelo teórico DISC</td><td>Basado en la teoría de William Moulton Marston (1928). Ítems conductuales originales GTI.</td></tr>
+      <tr><td style="font-weight:600">Marco de competencias</td><td>Marco propio GTI de 12 competencias en 4 clusters. Fundamentado en Spencer & Spencer (1993), Boyatzis (1982) y estándares de competencias laborales LATAM.</td></tr>
+      <tr><td style="font-weight:600">Formato DISC</td><td>28 bloques de elección forzada (más/menos descriptivo). 112 ítems conductuales.</td></tr>
+      <tr><td style="font-weight:600">Formato Competencias</td><td>60 ítems + 3 de consistencia. Escala Likert de frecuencia (1-5).</td></tr>
+      <tr><td style="font-weight:600">Tipo de puntuación DISC</td><td>Ipsativa (elección forzada) → puntajes de Diferencia (Más - Menos) → conversión a percentiles y T-scores.</td></tr>
+      <tr><td style="font-weight:600">Tipo de puntuación Competencias</td><td>Normativa → sumatoria por competencia → conversión a T-scores (M=50, SD=10).</td></tr>
+      <tr><td style="font-weight:600">Baremos</td><td>Provisionales LATAM. Basados en distribuciones típicas de DISC y competencias en muestras corporativas latinoamericanas. Pendiente validación de campo con muestra propia.</td></tr>
+      <tr><td style="font-weight:600">Parámetros normativos DISC</td><td>D: M=1.5, SD=5.5 | I: M=2.5, SD=5.0 | S: M=2.0, SD=5.0 | C: M=-0.5, SD=5.5</td></tr>
+      <tr><td style="font-weight:600">Parámetros normativos Competencias</td><td>M=18.0, SD=3.5 por competencia (rango bruto: 5-25)</td></tr>
+      <tr><td style="font-weight:600">Control de sesgo</td><td>3 ítems de consistencia/deseabilidad social. Umbral: ≥2 respuestas altas = precaución.</td></tr>
+      <tr><td style="font-weight:600">Confiabilidad esperada</td><td>α ≥ 0.70 por dimensión DISC y por competencia (pendiente validación empírica).</td></tr>
+      <tr><td style="font-weight:600">Validez de contenido</td><td>Ítems alineados con constructos teóricos establecidos. Revisión por experto en psicometría organizacional.</td></tr>
+      <tr><td style="font-weight:600">Requiere interpretación por</td><td>Profesional calificado en evaluación psicométrica o gestión del talento humano.</td></tr>
+      <tr><td style="font-weight:600">Propiedad intelectual</td><td>© ${new Date().getFullYear()} GTI — Gestión del Talento e Innovación, Costa Rica. Todos los derechos reservados.</td></tr>
+      <tr><td style="font-weight:600">Contacto</td><td>gticr.net | rbustamante@efhcr.com</td></tr>
+    </table>
+    <p style="margin-top:16px"><strong>Nota sobre baremos:</strong> Los baremos utilizados son provisionales y se basan en distribuciones típicas reportadas en la literatura para poblaciones corporativas latinoamericanas. Para una validación plena, se requiere un estudio de campo con muestra mínima de 200 participantes de la región, que permita calcular propiedades psicométricas reales (Cronbach's α, análisis factorial confirmatorio, estabilidad test-retest) y desarrollar tablas de percentiles con datos empíricos propios.</p>
+  </div>`;
+
+  // Watermark
+  html += `<div class="watermark">
+    <strong>DOCUMENTO CONFIDENCIAL</strong><br>
+    GTI Performance Assessment v1.0 — Propiedad de GTI Costa Rica — gticr.net<br>
+    Este reporte fue generado automáticamente y debe ser interpretado por un profesional calificado.<br>
+    Fecha de generación: ${new Date().toLocaleString('es-CR')}
+  </div>`;
+
+  document.getElementById('report-content').innerHTML = html;
+  showScreen('screen-report');
+}
+
+function generateDISCRadar(d){
+  const size = 300;
+  const cx = size/2, cy = size/2;
+  const maxR = 110;
+  const dims = ['D','I','S','C'];
+  const angles = [-Math.PI/2, 0, Math.PI/2, Math.PI];
+  const colors = {D:'#C62828',I:'#F9A825',S:'#2E7D32',C:'#1565C0'};
+  const names = {D:'Dominancia',I:'Influencia',S:'Estabilidad',C:'Cumplimiento'};
+
+  let svg = `<svg viewBox="0 0 ${size} ${size}" width="${size}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">`;
+
+  // Grid circles
+  for(let r=1;r<=4;r++){
+    const radius = maxR*(r/4);
+    svg += `<circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="${r<4?'3,3':''}"/>`;
+    if(r<4) svg += `<text x="${cx+4}" y="${cy-radius+4}" font-size="8" fill="var(--text-2)">${r*25}</text>`;
+  }
+  svg += `<text x="${cx+4}" y="${cy-maxR+4}" font-size="8" fill="var(--text-2)">100</text>`;
+
+  // Axes
+  dims.forEach((dim,i)=>{
+    const x2 = cx + maxR*Math.cos(angles[i]);
+    const y2 = cy + maxR*Math.sin(angles[i]);
+    svg += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="var(--border)" stroke-width="0.5"/>`;
+    const lx = cx + (maxR+25)*Math.cos(angles[i]);
+    const ly = cy + (maxR+25)*Math.sin(angles[i]);
+    const anchor = i===0?'middle':i===1?'start':i===2?'middle':'end';
+    svg += `<text x="${lx}" y="${ly+4}" text-anchor="${anchor}" font-size="11" font-weight="700" fill="${colors[dim]}">${names[dim]}</text>`;
+    svg += `<text x="${lx}" y="${ly+16}" text-anchor="${anchor}" font-size="9" fill="var(--text-2)">P${d.percentiles[dim]}</text>`;
+  });
+
+  // Data polygon
+  let points = dims.map((dim,i)=>{
+    const r = maxR*(d.percentiles[dim]/100);
+    return `${cx+r*Math.cos(angles[i])},${cy+r*Math.sin(angles[i])}`;
+  }).join(' ');
+  svg += `<polygon points="${points}" fill="rgba(27,54,93,0.15)" stroke="var(--pri)" stroke-width="2"/>`;
+
+  // Data points
+  dims.forEach((dim,i)=>{
+    const r = maxR*(d.percentiles[dim]/100);
+    const px = cx+r*Math.cos(angles[i]);
+    const py = cy+r*Math.sin(angles[i]);
+    svg += `<circle cx="${px}" cy="${py}" r="5" fill="${colors[dim]}" stroke="#fff" stroke-width="2"/>`;
+  });
+
+  svg += `</svg>`;
+  return svg;
+}
+
+function generateCompRadar(compScores){
+  const comps = Object.values(compScores);
+  const n = comps.length;
+  const size = 360;
+  const cx = size/2, cy = size/2;
+  const maxR = 120;
+
+  let svg = `<svg viewBox="0 0 ${size} ${size}" width="${size}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">`;
+
+  // Grid
+  for(let r=1;r<=4;r++){
+    const radius = maxR*(r/4);
+    let gPoints = [];
+    for(let i=0;i<n;i++){
+      const angle = (2*Math.PI*i/n)-Math.PI/2;
+      gPoints.push(`${cx+radius*Math.cos(angle)},${cy+radius*Math.sin(angle)}`);
+    }
+    svg += `<polygon points="${gPoints.join(' ')}" fill="none" stroke="var(--border)" stroke-width="0.5" ${r<4?'stroke-dasharray="3,3"':''}/>`;
+  }
+
+  // Axes and labels
+  comps.forEach((comp,i)=>{
+    const angle = (2*Math.PI*i/n)-Math.PI/2;
+    const x2 = cx+maxR*Math.cos(angle);
+    const y2 = cy+maxR*Math.sin(angle);
+    svg += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="var(--border)" stroke-width="0.5"/>`;
+
+    const lx = cx+(maxR+35)*Math.cos(angle);
+    const ly = cy+(maxR+35)*Math.sin(angle);
+    const words = comp.name.split(' ');
+    const line1 = words.slice(0,Math.ceil(words.length/2)).join(' ');
+    const line2 = words.slice(Math.ceil(words.length/2)).join(' ');
+    const anchor = angle > -0.1 && angle < Math.PI+0.1 ? (Math.abs(angle-Math.PI/2)<0.3?'middle':'start') : (Math.abs(angle+Math.PI/2)<0.3?'middle':'end');
+    svg += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" font-size="8" fill="var(--text-2)">${line1}</text>`;
+    if(line2) svg += `<text x="${lx}" y="${ly+10}" text-anchor="${anchor}" font-size="8" fill="var(--text-2)">${line2}</text>`;
+  });
+
+  // Data polygon
+  let points = comps.map((comp,i)=>{
+    const angle = (2*Math.PI*i/n)-Math.PI/2;
+    const r = maxR*(Math.min(comp.tScore,80)/80);
+    return `${cx+r*Math.cos(angle)},${cy+r*Math.sin(angle)}`;
+  }).join(' ');
+  svg += `<polygon points="${points}" fill="rgba(46,125,50,0.15)" stroke="var(--sec)" stroke-width="2"/>`;
+
+  // Points
+  comps.forEach((comp,i)=>{
+    const angle = (2*Math.PI*i/n)-Math.PI/2;
+    const r = maxR*(Math.min(comp.tScore,80)/80);
+    svg += `<circle cx="${cx+r*Math.cos(angle)}" cy="${cy+r*Math.sin(angle)}" r="4" fill="var(--sec)" stroke="#fff" stroke-width="1.5"/>`;
+  });
+
+  svg += `</svg>`;
+  return svg;
+}
+
+function generatePerformanceIntegration(disc, comps, participant){
+  const primary = disc.primary;
+  const compArr = Object.values(comps);
+  const avgT = Math.round(compArr.reduce((s,c)=>s+c.tScore,0)/compArr.length);
+  const discAvgPct = Math.round((['D','I','S','C'].reduce((s,d)=>s+disc.percentiles[d],0))/4);
+
+  const integrationMap = {
+    D:{
+      highComp:['Orientación a Resultados','Toma de Decisiones','Pensamiento Estratégico'],
+      devComp:['Trabajo Colaborativo','Comunicación Efectiva','Adaptabilidad'],
+      rolesFit:['Dirección General','Gerencia de Ventas','Gestión de Proyectos','Emprendimiento','Consultoría Estratégica']
+    },
+    I:{
+      highComp:['Comunicación Efectiva','Liderazgo de Personas','Orientación al Cliente'],
+      devComp:['Pensamiento Analítico','Organización y Planificación','Calidad y Mejora Continua'],
+      rolesFit:['Ventas y Desarrollo Comercial','Capacitación y Desarrollo','Relaciones Públicas','Marketing','Atención al Cliente']
+    },
+    S:{
+      highComp:['Trabajo Colaborativo','Integridad y Ética','Orientación al Cliente'],
+      devComp:['Pensamiento Estratégico','Toma de Decisiones','Orientación a Resultados'],
+      rolesFit:['Recursos Humanos','Servicio al Cliente','Administración','Soporte Técnico','Gestión de Calidad']
+    },
+    C:{
+      highComp:['Pensamiento Analítico','Calidad y Mejora Continua','Organización y Planificación'],
+      devComp:['Liderazgo de Personas','Comunicación Efectiva','Adaptabilidad'],
+      rolesFit:['Finanzas y Contabilidad','Auditoría','Análisis de Datos','Control de Calidad','Gestión de Riesgos']
+    }
+  };
+
+  const im = integrationMap[primary];
+  let html = '';
+
+  html += `<h3>Perfil Integrado</h3>
+  <p>El estilo conductual <strong>${DISC_PROFILES[primary].name}</strong> (P${disc.percentiles[primary]}) combinado con un nivel de competencias promedio T=${avgT} configura el siguiente perfil de desempeño:</p>`;
+
+  // Alignment analysis
+  const strengths = compArr.filter(c=>c.tScore>=55);
+  const aligned = strengths.filter(c=>im.highComp.includes(c.name));
+  const gaps = compArr.filter(c=>c.tScore<45);
+  const criticalGaps = gaps.filter(c=>im.highComp.includes(c.name));
+
+  if(aligned.length > 0){
+    html += `<div class="rec-item"><strong>Alineación fortaleza-estilo:</strong> ${aligned.map(c=>c.name).join(', ')} refuerzan naturalmente su perfil ${DISC_PROFILES[primary].name}. Esta combinación potencia su desempeño en roles que requieren ${im.rolesFit.slice(0,2).join(' y ').toLowerCase()}.</div>`;
+  }
+
+  if(criticalGaps.length > 0){
+    html += `<div class="rec-item" style="border-left-color:var(--acc)"><strong>Brecha crítica:</strong> ${criticalGaps.map(c=>c.name).join(', ')} — competencias clave para su estilo ${DISC_PROFILES[primary].name} que actualmente están en desarrollo. Priorizar estas áreas tendría el mayor impacto en su desempeño.</div>`;
+  }
+
+  html += `<h3>Familias de puesto con mayor ajuste</h3>
+  <p>Con base en la combinación de su perfil DISC y competencias, las familias de puesto con mayor probabilidad de alto desempeño son:</p>
+  <ul>${im.rolesFit.map(r=>`<li>${r}</li>`).join('')}</ul>
+
+  <h3>Rol en equipo</h3>`;
+
+  const teamRoles = {
+    D:'<strong>Motor del equipo:</strong> Impulsa la acción, establece la urgencia, mantiene al equipo enfocado en resultados. Mejor como líder de proyecto o sponsor ejecutivo.',
+    I:'<strong>Integrador del equipo:</strong> Conecta personas, genera entusiasmo, facilita la comunicación. Mejor como vocero, facilitador de reuniones o líder de cultura.',
+    S:'<strong>Ancla del equipo:</strong> Mantiene la cohesión, apoya a los demás, asegura la continuidad. Mejor como coordinador, mediador o responsable de seguimiento.',
+    C:'<strong>Garante de calidad:</strong> Asegura la precisión, identifica riesgos, mantiene estándares. Mejor como revisor, analista o responsable de control de calidad.'
+  };
+  html += `<p>${teamRoles[primary]}</p>`;
+
+  return html;
+}
+
+function generateRecommendations(disc, comps, participant){
+  const compArr = Object.values(comps);
+  const gaps = compArr.filter(c=>c.tScore<45).sort((a,b)=>a.tScore-b.tScore);
+  const strengths = compArr.filter(c=>c.tScore>=55).sort((a,b)=>b.tScore-a.tScore);
+  const primary = disc.primary;
+
+  const devActions = {
+    PE:['Participar en sesiones de planeación estratégica como observador o contribuyente','Leer reportes de tendencias del sector y compartir hallazgos con el equipo','Ejercicio mensual: identificar 3 oportunidades y 3 amenazas del entorno'],
+    LP:['Programa de mentoría: acompañar a un colaborador en su desarrollo profesional','Practicar retroalimentación estructurada (modelo SBI: Situación-Comportamiento-Impacto)','Delegar una responsabilidad nueva cada mes con seguimiento semanal'],
+    TD:['Usar una matriz de decisión (impacto/esfuerzo) en las próximas 3 decisiones importantes','Documentar el proceso de decisión y resultados para crear un historial de aprendizaje','Pedir retroalimentación a un colega sobre la calidad de sus decisiones recientes'],
+    OR:['Establecer 3 metas SMART para el próximo trimestre con indicadores semanales','Implementar una revisión semanal de avance (15 min) con su jefe directo','Identificar y eliminar una actividad que no agrega valor a los resultados'],
+    OP:['Adoptar un sistema de gestión de tareas (digital o físico) con priorización diaria','Bloquear tiempo en la agenda para trabajo profundo sin interrupciones','Crear plantillas para los procesos repetitivos de su área'],
+    CM:['Implementar una lista de verificación de calidad para sus entregables principales','Proponer una mejora de proceso al mes documentando el antes y después','Participar en un benchmarking con un área de referencia dentro o fuera de la empresa'],
+    CE:['Practicar la técnica de "escucha activa + parafraseo" en cada reunión importante','Preparar un esquema breve antes de cada presentación o comunicación clave','Solicitar retroalimentación sobre la claridad de su comunicación escrita'],
+    TC:['Ofrecer apoyo proactivo a un compañero en un proyecto fuera de su área','Facilitar una sesión de trabajo colaborativo con un equipo interdisciplinario','Practicar el reconocimiento público: destacar una contribución ajena por semana'],
+    OC:['Realizar una encuesta breve de satisfacción con sus clientes internos/externos','Implementar un seguimiento post-servicio para verificar satisfacción','Documentar 3 momentos de verdad del servicio y proponer mejoras específicas'],
+    PA:['Antes de proponer una solución, documentar el análisis con datos de respaldo','Practicar el método de los "5 por qués" ante cada problema que enfrente','Crear un dashboard personal con los 5 indicadores más relevantes de su gestión'],
+    AD:['Aceptar voluntariamente un proyecto fuera de su zona de confort este trimestre','Practicar la técnica "sí, y además..." ante propuestas nuevas antes de cuestionar','Documentar 3 cambios recientes y lo que aprendió de cada uno'],
+    IE:['Revisar y actualizar sus compromisos pendientes cada viernes','Identificar una situación donde la decisión ética sea difícil y consultar con un mentor','Practicar la transparencia proactiva: comunicar riesgos o errores antes de que pregunten']
+  };
+
+  let html = '';
+
+  if(gaps.length > 0){
+    html += `<h3>Plan de desarrollo prioritario</h3>
+    <p>Las siguientes competencias representan las áreas de mayor oportunidad de mejora:</p>`;
+    gaps.forEach((gap,i)=>{
+      const actions = devActions[Object.keys(comps).find(k=>comps[k].name===gap.name)] || [];
+      html += `<div class="rec-item" style="border-left-color:${i===0?'var(--d-color)':'var(--acc)'}">
+        <strong>${i+1}. ${gap.name}</strong> (T=${gap.tScore}, ${gap.level})<br>
+        <em>Acciones recomendadas:</em>
+        <ul style="margin:8px 0 0">${actions.map(a=>`<li>${a}</li>`).join('')}</ul>
+      </div>`;
+    });
+  }
+
+  if(strengths.length > 0){
+    html += `<h3>Fortalezas a potenciar</h3>
+    <p>Estas competencias representan ventajas competitivas. Se recomienda mantenerlas y buscar oportunidades para transferirlas al equipo:</p>
+    <ul>${strengths.map(s=>`<li><strong>${s.name}</strong> (T=${s.tScore}, ${s.level}) — buscar roles de mentoría, liderazgo de proyecto o referente interno en esta competencia.</li>`).join('')}</ul>`;
+  }
+
+  // DISC-based recommendations
+  html += `<h3>Recomendaciones según perfil conductual</h3>`;
+  const discRecs = {
+    D:['Practicar la pausa antes de responder — contar hasta 3 antes de dar una instrucción directa','Incorporar preguntas abiertas en sus reuniones para fomentar participación','Celebrar los avances del equipo, no solo los resultados finales','Delegar el control en áreas menos críticas para desarrollar autonomía en otros'],
+    I:['Implementar un sistema de follow-up para compromisos adquiridos','Dedicar 20 minutos diarios a tareas analíticas o de documentación','Practicar decir "déjame revisarlo y te confirmo" antes de comprometerse','Balancear el tiempo social con bloques de trabajo individual profundo'],
+    S:['Expresar su opinión al inicio de las reuniones, no solo al final','Proponer un cambio pequeño cada semana para ejercitar la adaptabilidad','Practicar la retroalimentación directa cuando algo no funciona','Aceptar un rol de mayor visibilidad en un proyecto próximo'],
+    C:['Establecer un límite de tiempo para el análisis antes de actuar','Compartir conclusiones parciales sin esperar a tener toda la información','Practicar la comunicación informal con colegas de otras áreas','Delegar tareas de detalle para enfocarse en decisiones de mayor impacto']
+  };
+
+  html += `<ul>${discRecs[primary].map(r=>`<li>${r}</li>`).join('')}</ul>`;
+
+  return html;
+}
+
+function downloadJSON(){
+  const data = {
+    instrument:'GTI Performance Assessment v1.0 — DISC + Competencias',
+    version:'1.0',
+    date:state.results.date,
+    participant:state.participant,
+    disc:state.results.disc,
+    competencies:state.results.competencies,
+    consistency:state.results.consistency,
+    timing:state.results.timing
+  };
+  const blob = new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `GTI_Assessment_${state.participant.name.replace(/\s+/g,'_')}_${state.results.date}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
+</script>

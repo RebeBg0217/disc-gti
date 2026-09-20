@@ -1,0 +1,643 @@
+<title>Manual Técnico — GTI Assessment</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+:root{
+  --pri:#1B365D;--pri-l:#2A4A7F;--sec:#2E7D32;--acc:#E65100;
+  --bg:#FAFBFD;--card:#FFFFFF;--text:#1C1E2A;--text-2:#5A5D72;--border:#DDE0EA;
+  --d-color:#C62828;--i-color:#F9A825;--s-color:#2E7D32;--c-color:#1565C0;
+}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0E1017;--card:#181B28;--text:#E4E5ED;--text-2:#8E90A6;--border:#282B3A;
+}}
+:root[data-theme="dark"]{
+  --bg:#0E1017;--card:#181B28;--text:#E4E5ED;--text-2:#8E90A6;--border:#282B3A;
+}
+body{background:var(--bg);color:var(--text);font-family:'Inter',system-ui,sans-serif;font-size:15px;line-height:1.75;margin:0;padding:0 16px}
+.manual{max-width:780px;margin:0 auto;padding:40px 0}
+h1,h2,h3{font-family:'Merriweather',Georgia,serif;color:var(--pri);line-height:1.3;text-wrap:balance}
+h1{font-size:1.8em;margin:0 0 8px;border-bottom:3px solid var(--pri);padding-bottom:12px}
+h2{font-size:1.35em;margin:40px 0 12px;border-bottom:2px solid var(--border);padding-bottom:8px}
+h3{font-size:1.05em;margin:24px 0 8px;color:var(--pri-l)}
+p{margin:0 0 12px}
+.subtitle{color:var(--text-2);font-size:0.9em;font-style:italic;margin-bottom:24px}
+.cover{text-align:center;padding:60px 20px;border-bottom:3px solid var(--pri);margin-bottom:40px}
+.cover .org{font-size:2.2em;font-weight:800;color:var(--pri);letter-spacing:-1px;font-family:'Merriweather',serif}
+.cover .doc-type{font-size:0.85em;color:var(--text-2);text-transform:uppercase;letter-spacing:2px;margin:8px 0 24px}
+.cover h1{border:none;font-size:1.6em}
+.toc{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:24px 32px;margin:24px 0}
+.toc a{color:var(--pri);text-decoration:none}.toc a:hover{text-decoration:underline}
+.toc ol{padding-left:20px}.toc li{margin:6px 0;font-size:0.95em}
+table{width:100%;border-collapse:collapse;margin:16px 0;font-size:0.9em}
+th{background:var(--pri);color:#fff;padding:10px 12px;text-align:left;font-weight:600;font-family:'Inter',sans-serif}
+td{padding:10px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+tr:hover td{background:rgba(27,54,93,0.03)}
+.note{padding:16px 20px;border-radius:8px;margin:16px 0;font-size:0.9em}
+.note-info{background:rgba(21,101,192,0.08);border-left:4px solid var(--c-color);color:var(--text)}
+.note-warning{background:rgba(230,81,0,0.08);border-left:4px solid var(--acc);color:var(--text)}
+.note-success{background:rgba(46,125,50,0.08);border-left:4px solid var(--sec);color:var(--text)}
+ul,ol{margin:8px 0 16px;padding-left:24px}
+li{margin:4px 0}
+.badge{display:inline-block;padding:2px 10px;border-radius:12px;font-size:0.75em;font-weight:600}
+.badge-d{background:rgba(198,40,40,0.12);color:var(--d-color)}
+.badge-i{background:rgba(249,168,37,0.15);color:#BF6B00}
+.badge-s{background:rgba(46,125,50,0.12);color:var(--s-color)}
+.badge-c{background:rgba(21,101,192,0.12);color:var(--c-color)}
+.formula{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:16px;font-family:monospace;text-align:center;margin:12px 0;font-size:0.95em}
+.ref{font-size:0.85em;color:var(--text-2);padding-left:24px;text-indent:-24px;margin:4px 0}
+.footer{text-align:center;padding:24px;font-size:0.8em;color:var(--text-2);border-top:2px solid var(--border);margin-top:40px}
+@media print{
+  body{background:#fff;color:#000;font-size:11pt;padding:0}
+  .cover{page-break-after:always}
+  h2{page-break-after:avoid}
+  table{page-break-inside:avoid}
+  .note{border:1px solid #ccc}
+}
+</style>
+
+<div class="manual">
+
+<!-- COVER -->
+<div class="cover">
+  <div class="org">GTI</div>
+  <div class="doc-type">Gestión del Talento e Innovación — Costa Rica</div>
+  <h1>Manual Técnico y de Administración</h1>
+  <p style="font-size:1.15em;font-weight:600;color:var(--pri)">Evaluación Integral de Desempeño<br>DISC + Competencias Organizacionales</p>
+  <p class="subtitle">Versión 1.0 — Septiembre 2026</p>
+  <p style="font-size:0.85em;color:var(--text-2)">Documento confidencial — Propiedad intelectual de GTI Costa Rica<br>gticr.net | rbustamante@efhcr.com</p>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div class="toc">
+  <h2 style="margin-top:0;border:none">Contenido</h2>
+  <ol>
+    <li><a href="#cap1">Descripción general del instrumento</a></li>
+    <li><a href="#cap2">Fundamento teórico</a></li>
+    <li><a href="#cap3">Diseño del instrumento</a></li>
+    <li><a href="#cap4">Propiedades psicométricas</a></li>
+    <li><a href="#cap5">Baremos y normativización</a></li>
+    <li><a href="#cap6">Procedimiento de administración</a></li>
+    <li><a href="#cap7">Sistema de calificación</a></li>
+    <li><a href="#cap8">Guía de interpretación DISC</a></li>
+    <li><a href="#cap9">Guía de interpretación de competencias</a></li>
+    <li><a href="#cap10">Integración DISC + Competencias</a></li>
+    <li><a href="#cap11">Consideraciones éticas y legales</a></li>
+    <li><a href="#cap12">Plan de validación de campo</a></li>
+    <li><a href="#cap13">Referencias bibliográficas</a></li>
+    <li><a href="#anexoA">Anexo A: Tablas de baremos completos</a></li>
+    <li><a href="#anexoB">Anexo B: Catálogo de ítems</a></li>
+    <li><a href="#anexoC">Anexo C: Perfiles DISC — Guía rápida de interpretación</a></li>
+  </ol>
+</div>
+
+<!-- CHAPTER 1 -->
+<h2 id="cap1">1. Descripción general del instrumento</h2>
+
+<h3>1.1 Nombre y propósito</h3>
+<p><strong>Nombre:</strong> Evaluación Integral de Desempeño GTI — DISC + Competencias Organizacionales (EID-GTI v1.0).</p>
+<p><strong>Propósito:</strong> Medir el perfil conductual (modelo DISC) y el nivel de competencias organizacionales de colaboradores en entornos corporativos latinoamericanos, con fines de:</p>
+<ul>
+  <li>Selección y contratación de personal</li>
+  <li>Diagnóstico de desempeño actual</li>
+  <li>Identificación de potencial y planes de desarrollo</li>
+  <li>Conformación y optimización de equipos de trabajo</li>
+  <li>Promoción interna y sucesión</li>
+  <li>Evaluación de liderazgo</li>
+</ul>
+
+<h3>1.2 Población objetivo</h3>
+<p>Adultos (18+ años) en entorno laboral formal en América Latina. Nivel educativo mínimo: bachillerato completo. El instrumento está redactado en español neutro con modismos comprensibles en toda la región LATAM.</p>
+
+<h3>1.3 Estructura del instrumento</h3>
+<table>
+  <tr><th>Sección</th><th>Formato</th><th>Ítems</th><th>Duración estimada</th></tr>
+  <tr><td><strong>Sección 1: Perfil DISC</strong></td><td>Elección forzada (más/menos descriptivo)</td><td>28 bloques × 4 descriptores = 112 ítems</td><td>10-15 min</td></tr>
+  <tr><td><strong>Sección 2: Competencias</strong></td><td>Escala Likert de frecuencia (1-5)</td><td>60 ítems + 3 de consistencia = 63 ítems</td><td>15-20 min</td></tr>
+  <tr><td><strong>Total</strong></td><td>—</td><td><strong>175 ítems</strong></td><td><strong>25-35 min</strong></td></tr>
+</table>
+
+<h3>1.4 Propiedad intelectual</h3>
+<p>Todos los ítems, algoritmos de calificación, marco de competencias y material de interpretación son creaciones originales de GTI — Gestión del Talento e Innovación, Costa Rica. El modelo teórico DISC es de dominio público (William Moulton Marston, 1928). Ningún ítem fue tomado de instrumentos con copyright vigente (DiSC® de Wiley, diccionario de Martha Alles, ni catálogos de CSC/Psicoweb). El marco de competencias fue desarrollado a partir de la literatura académica (Spencer & Spencer, Boyatzis) con redacción original.</p>
+
+<!-- CHAPTER 2 -->
+<h2 id="cap2">2. Fundamento teórico</h2>
+
+<h3>2.1 Modelo DISC</h3>
+<p>El modelo DISC tiene su origen en la obra <em>Emotions of Normal People</em> de William Moulton Marston (1928), quien propuso que las emociones conductuales de las personas normales se expresan a lo largo de dos ejes:</p>
+<ul>
+  <li><strong>Eje 1:</strong> Percepción del entorno (favorable vs. desfavorable)</li>
+  <li><strong>Eje 2:</strong> Respuesta al entorno (activa vs. pasiva)</li>
+</ul>
+<p>La combinación de estos ejes produce cuatro tendencias conductuales:</p>
+
+<table>
+  <tr><th>Dimensión</th><th>Eje</th><th>Descripción</th></tr>
+  <tr><td><span class="badge badge-d">D</span> <strong>Dominancia</strong></td><td>Entorno desfavorable + Respuesta activa</td><td>Cómo la persona aborda los problemas y desafíos. Orientación al poder, control y resultados.</td></tr>
+  <tr><td><span class="badge badge-i">I</span> <strong>Influencia</strong></td><td>Entorno favorable + Respuesta activa</td><td>Cómo la persona influye en otros. Orientación a las personas, persuasión y reconocimiento.</td></tr>
+  <tr><td><span class="badge badge-s">S</span> <strong>Estabilidad</strong></td><td>Entorno favorable + Respuesta pasiva</td><td>Cómo la persona maneja el ritmo y la consistencia. Orientación a la seguridad, lealtad y cooperación.</td></tr>
+  <tr><td><span class="badge badge-c">C</span> <strong>Cumplimiento</strong></td><td>Entorno desfavorable + Respuesta pasiva</td><td>Cómo la persona responde a reglas y procedimientos. Orientación a la calidad, precisión y estándares.</td></tr>
+</table>
+
+<div class="note note-info"><strong>Nota:</strong> El modelo DISC mide <em>tendencias conductuales</em>, no inteligencia, aptitudes ni valores morales. Todas las combinaciones de perfil son igualmente válidas; no existe un perfil "mejor" o "peor" — cada uno tiene fortalezas y áreas de oportunidad en función del contexto laboral.</div>
+
+<h3>2.2 Formato de elección forzada</h3>
+<p>El EID-GTI utiliza el formato de elección forzada (ipsativa) para la Sección DISC, siguiendo la tradición de los instrumentos DISC clásicos. En cada bloque, el evaluado debe seleccionar una frase como "más descriptiva" y otra como "menos descriptiva" de su comportamiento habitual en el trabajo.</p>
+<p>Ventajas de este formato:</p>
+<ul>
+  <li><strong>Reduce el sesgo de aquiescencia:</strong> No es posible responder "sí" a todo.</li>
+  <li><strong>Controla la deseabilidad social:</strong> Las cuatro opciones están equilibradas en atractivo social.</li>
+  <li><strong>Genera dos perfiles:</strong> El perfil "Más" (estilo adaptado/máscara) y el perfil "Menos" (estilo natural/núcleo).</li>
+</ul>
+
+<h3>2.3 Marco de competencias GTI</h3>
+<p>El marco de 12 competencias organizacionales fue diseñado para cubrir los principales dominios de desempeño laboral en organizaciones latinoamericanas. Se fundamenta en:</p>
+<ul>
+  <li>Spencer, L.M. & Spencer, S.M. (1993). <em>Competence at Work</em>: Modelo de competencias basado en rendimiento superior.</li>
+  <li>Boyatzis, R.E. (1982). <em>The Competent Manager</em>: Competencias de inteligencia emocional y social.</li>
+  <li>McClelland, D.C. (1973). <em>Testing for Competence Rather Than Intelligence</em>: Fundamento del enfoque de competencias.</li>
+  <li>Estándares de competencias laborales de CONOCER (México) y INA (Costa Rica).</li>
+</ul>
+
+<p>Las 12 competencias se organizan en 4 clusters:</p>
+
+<table>
+  <tr><th>Cluster</th><th>Competencia</th><th>Código</th></tr>
+  <tr><td rowspan="3"><strong>Liderazgo y Visión</strong></td><td>Pensamiento Estratégico</td><td>PE</td></tr>
+  <tr><td>Liderazgo de Personas</td><td>LP</td></tr>
+  <tr><td>Toma de Decisiones</td><td>TD</td></tr>
+  <tr><td rowspan="3"><strong>Ejecución y Productividad</strong></td><td>Orientación a Resultados</td><td>OR</td></tr>
+  <tr><td>Organización y Planificación</td><td>OP</td></tr>
+  <tr><td>Calidad y Mejora Continua</td><td>CM</td></tr>
+  <tr><td rowspan="3"><strong>Relaciones y Comunicación</strong></td><td>Comunicación Efectiva</td><td>CE</td></tr>
+  <tr><td>Trabajo Colaborativo</td><td>TC</td></tr>
+  <tr><td>Orientación al Cliente</td><td>OC</td></tr>
+  <tr><td rowspan="3"><strong>Desarrollo y Adaptación</strong></td><td>Pensamiento Analítico</td><td>PA</td></tr>
+  <tr><td>Adaptabilidad</td><td>AD</td></tr>
+  <tr><td>Integridad y Ética</td><td>IE</td></tr>
+</table>
+
+<h3>2.4 Formato Likert de frecuencia</h3>
+<p>La Sección de Competencias utiliza una escala Likert de 5 puntos de frecuencia conductual:</p>
+<table>
+  <tr><th>Valor</th><th>Etiqueta</th><th>Definición operacional</th></tr>
+  <tr><td>1</td><td>Nunca o casi nunca</td><td>La conducta no se manifiesta o lo hace en menos del 10% de las situaciones relevantes</td></tr>
+  <tr><td>2</td><td>Pocas veces</td><td>La conducta se manifiesta en el 10-35% de las situaciones relevantes</td></tr>
+  <tr><td>3</td><td>Algunas veces</td><td>La conducta se manifiesta en el 35-65% de las situaciones relevantes</td></tr>
+  <tr><td>4</td><td>Frecuentemente</td><td>La conducta se manifiesta en el 65-90% de las situaciones relevantes</td></tr>
+  <tr><td>5</td><td>Siempre o casi siempre</td><td>La conducta se manifiesta en más del 90% de las situaciones relevantes</td></tr>
+</table>
+
+<!-- CHAPTER 3 -->
+<h2 id="cap3">3. Diseño del instrumento</h2>
+
+<h3>3.1 Proceso de construcción de ítems DISC</h3>
+<p>Los 112 ítems conductuales (28 bloques × 4 ítems) fueron desarrollados siguiendo el siguiente proceso:</p>
+<ol>
+  <li><strong>Definición de constructo:</strong> Operacionalización de cada dimensión DISC en indicadores conductuales observables en el entorno laboral.</li>
+  <li><strong>Generación de pool inicial:</strong> 180 descriptores conductuales generados a partir de la teoría de Marston y la literatura DISC contemporánea.</li>
+  <li><strong>Filtro de originalidad:</strong> Eliminación de descriptores que coincidieran con la redacción de instrumentos comerciales existentes.</li>
+  <li><strong>Equilibrio de deseabilidad social:</strong> Cada bloque fue diseñado para que las 4 opciones fueran igualmente atractivas en un contexto laboral, evitando que una opción fuera "obviamente correcta".</li>
+  <li><strong>Revisión lingüística:</strong> Adaptación a español neutro LATAM, evitando modismos regionales que pudieran ser incomprensibles en algún país.</li>
+  <li><strong>Selección final:</strong> 28 bloques seleccionados por su claridad, discriminación esperada y balance entre dimensiones.</li>
+</ol>
+
+<h3>3.2 Criterios de diseño de ítems de competencia</h3>
+<p>Los 60 ítems de competencias (5 por competencia × 12 competencias) fueron diseñados bajo los siguientes criterios:</p>
+<ul>
+  <li><strong>Conductual:</strong> Cada ítem describe un comportamiento observable, no una actitud o intención.</li>
+  <li><strong>Específico:</strong> Lo suficientemente concreto para que el evaluado pueda estimar su frecuencia.</li>
+  <li><strong>Unidimensional:</strong> Cada ítem mide una sola competencia.</li>
+  <li><strong>Dirección positiva:</strong> Todos los ítems están redactados en dirección positiva (mayor puntuación = mayor competencia).</li>
+  <li><strong>Nivel de lectura:</strong> Comprensible con nivel de bachillerato completo.</li>
+</ul>
+
+<h3>3.3 Ítems de consistencia/deseabilidad social</h3>
+<p>Se incluyeron 3 ítems de control intercalados en la Sección de Competencias. Estos ítems describen conductas prácticamente imposibles de cumplir al 100%, por lo que una puntuación alta (4 o 5) en ellos sugiere sesgo de deseabilidad social:</p>
+<ul>
+  <li>"Jamás he cometido un error en mi trabajo"</li>
+  <li>"Siempre estoy de acuerdo con todas las decisiones de mis superiores"</li>
+  <li>"Nunca he sentido frustración alguna en el trabajo"</li>
+</ul>
+<p><strong>Criterio de alerta:</strong> 2 o más ítems de consistencia con puntuación ≥ 4 activan una bandera de "Precaución: posible sesgo de deseabilidad social" en el reporte. Esto no invalida la evaluación, pero indica que los resultados deben interpretarse con cautela, posiblemente solicitando una segunda aplicación en un entorno con menor presión social.</p>
+
+<!-- CHAPTER 4 -->
+<h2 id="cap4">4. Propiedades psicométricas</h2>
+
+<div class="note note-warning"><strong>Estado actual:</strong> Las propiedades psicométricas descritas a continuación son <em>esperadas</em> con base en la teoría, la investigación previa sobre instrumentos DISC y la metodología de construcción. La validación empírica definitiva requiere el estudio de campo descrito en el Capítulo 12.</div>
+
+<h3>4.1 Confiabilidad</h3>
+<p><strong>Consistencia interna esperada (Cronbach's α):</strong></p>
+<table>
+  <tr><th>Escala</th><th>α esperado</th><th>Fundamentación</th></tr>
+  <tr><td>DISC — Dominancia</td><td>≥ 0.72</td><td>Consistente con valores reportados en instrumentos DISC validados (Scullard & Baum, 2015)</td></tr>
+  <tr><td>DISC — Influencia</td><td>≥ 0.74</td><td>Dimensión con mayor coherencia conductual reportada</td></tr>
+  <tr><td>DISC — Estabilidad</td><td>≥ 0.71</td><td>Valores moderados típicos del constructo</td></tr>
+  <tr><td>DISC — Cumplimiento</td><td>≥ 0.73</td><td>Consistente con la literatura</td></tr>
+  <tr><td>Competencias (por escala)</td><td>≥ 0.70</td><td>Umbral mínimo aceptable para instrumentos de 5 ítems (Nunnally & Bernstein, 1994)</td></tr>
+  <tr><td>Competencias (total)</td><td>≥ 0.90</td><td>Esperado para 60 ítems unidireccionales</td></tr>
+</table>
+
+<p><strong>Estabilidad test-retest esperada:</strong> r ≥ 0.80 con intervalo de 2-4 semanas (basado en meta-análisis de instrumentos DISC; Marston, 1928; Inscape, 2008).</p>
+
+<h3>4.2 Validez</h3>
+
+<p><strong>4.2.1 Validez de contenido</strong></p>
+<p>Los ítems fueron alineados con las definiciones operacionales de cada constructo (DISC: Marston, 1928; Competencias: Spencer & Spencer, 1993). Cada ítem DISC mapea a una sola dimensión y cada ítem de competencia a una sola competencia. La cobertura del dominio fue verificada contra la operacionalización de cada constructo.</p>
+
+<p><strong>4.2.2 Validez de constructo (esperada)</strong></p>
+<ul>
+  <li><strong>DISC:</strong> Se espera una estructura factorial de 4 factores con rotación varimax que replique la estructura D-I-S-C. Correlaciones interfactoriales esperadas: moderadas negativas entre D-S y entre I-C (constructos opuestos en el modelo de Marston), bajas entre factores adyacentes.</li>
+  <li><strong>Competencias:</strong> Se espera una estructura de 12 factores de primer orden agrupados en 4 factores de segundo orden correspondientes a los clusters.</li>
+</ul>
+
+<p><strong>4.2.3 Validez de criterio (esperada)</strong></p>
+<ul>
+  <li>Correlación positiva entre D alta y evaluaciones de desempeño en roles de liderazgo directivo.</li>
+  <li>Correlación positiva entre I alta y desempeño en roles comerciales/ventas.</li>
+  <li>Correlación positiva entre S alta y permanencia/retención en el puesto.</li>
+  <li>Correlación positiva entre C alta y desempeño en roles de control/calidad.</li>
+  <li>Puntuación total de competencias correlacionada con evaluaciones de desempeño del supervisor (r esperado ≥ 0.40).</li>
+</ul>
+
+<h3>4.3 Error estándar de medición (EEM)</h3>
+<p>El EEM se calcula como:</p>
+<div class="formula">EEM = SD × √(1 - α)</div>
+<p>Con los parámetros normativos LATAM y la confiabilidad esperada:</p>
+<table>
+  <tr><th>Escala</th><th>SD</th><th>α esperado</th><th>EEM</th><th>Banda de confianza (95%)</th></tr>
+  <tr><td>DISC-D</td><td>5.5</td><td>0.72</td><td>2.91</td><td>±5.71 puntos brutos</td></tr>
+  <tr><td>DISC-I</td><td>5.0</td><td>0.74</td><td>2.55</td><td>±5.00 puntos brutos</td></tr>
+  <tr><td>DISC-S</td><td>5.0</td><td>0.71</td><td>2.69</td><td>±5.28 puntos brutos</td></tr>
+  <tr><td>DISC-C</td><td>5.5</td><td>0.73</td><td>2.86</td><td>±5.60 puntos brutos</td></tr>
+  <tr><td>Competencia (cada una)</td><td>3.5</td><td>0.70</td><td>1.92</td><td>±3.76 puntos brutos</td></tr>
+</table>
+<div class="note note-info"><strong>Implicación práctica:</strong> Diferencias entre dos personas menores al EEM × 2 no deben considerarse significativas. Al comparar candidatos, solo diferencias que excedan la banda de confianza son interpretables.</div>
+
+<!-- CHAPTER 5 -->
+<h2 id="cap5">5. Baremos y normativización</h2>
+
+<h3>5.1 Muestra normativa</h3>
+<div class="note note-warning"><strong>Baremos provisionales:</strong> Los baremos actuales son PROVISIONALES, basados en distribuciones típicas reportadas en la literatura para poblaciones corporativas latinoamericanas. No provienen de una muestra empírica propia. Se requiere un estudio de normativización con muestra mínima de N=200 participantes de la región (ver Capítulo 12).</div>
+
+<h3>5.2 Parámetros normativos DISC (provisional LATAM)</h3>
+<p>Los parámetros se basan en estudios publicados de DISC en América Latina, ajustados por diferencias culturales documentadas:</p>
+<table>
+  <tr><th>Dimensión</th><th>Media (M)</th><th>Desviación Estándar (SD)</th><th>Ajuste cultural LATAM</th></tr>
+  <tr><td><span class="badge badge-d">D</span> Dominancia</td><td>1.5</td><td>5.5</td><td>Sin ajuste significativo vs. normas globales en muestras corporativas</td></tr>
+  <tr><td><span class="badge badge-i">I</span> Influencia</td><td>2.5</td><td>5.0</td><td>+1.0 vs. normas anglosajonas. Cultura LATAM más expresiva y orientada a relaciones</td></tr>
+  <tr><td><span class="badge badge-s">S</span> Estabilidad</td><td>2.0</td><td>5.0</td><td>+0.5 vs. normas anglosajonas. Mayor valoración de estabilidad/familia</td></tr>
+  <tr><td><span class="badge badge-c">C</span> Cumplimiento</td><td>-0.5</td><td>5.5</td><td>-0.5 vs. normas anglosajonas. Menor rigidez normativa en contexto organizacional LATAM</td></tr>
+</table>
+<p><strong>Base del puntaje:</strong> Diferencia (Más - Menos). Rango teórico: -28 a +28.</p>
+<p><strong>Conversión a percentil:</strong></p>
+<div class="formula">Percentil = Φ((Puntaje Bruto - Media) / SD) × 100<br><small>donde Φ = función de distribución acumulada normal estándar</small></div>
+
+<h3>5.3 Parámetros normativos de Competencias (provisional LATAM)</h3>
+<table>
+  <tr><th>Parámetro</th><th>Valor</th><th>Justificación</th></tr>
+  <tr><td>Media por competencia</td><td>18.0</td><td>Punto medio ligeramente elevado por deseabilidad social en autoreporte</td></tr>
+  <tr><td>Desviación estándar</td><td>3.5</td><td>Variabilidad esperada en escala de 5 ítems × 5 puntos</td></tr>
+  <tr><td>Rango bruto</td><td>5-25</td><td>Suma de 5 ítems (1-5 cada uno)</td></tr>
+</table>
+<p><strong>Conversión a T-Score:</strong></p>
+<div class="formula">T = 50 + 10 × (Puntaje Bruto - 18.0) / 3.5</div>
+
+<h3>5.4 Niveles de competencia</h3>
+<table>
+  <tr><th>Nivel</th><th>Rango T-Score</th><th>Percentil aprox.</th><th>Descripción</th></tr>
+  <tr><td><strong>Crítico</strong></td><td>&lt; 35</td><td>&lt; 7</td><td>Competencia significativamente por debajo del promedio. Requiere intervención inmediata.</td></tr>
+  <tr><td><strong>En Desarrollo</strong></td><td>35-44</td><td>7-30</td><td>Competencia por debajo del promedio. Área de desarrollo prioritaria.</td></tr>
+  <tr><td><strong>Competente</strong></td><td>45-54</td><td>31-69</td><td>Nivel esperado. Desempeño adecuado para el cargo.</td></tr>
+  <tr><td><strong>Avanzado</strong></td><td>55-64</td><td>70-93</td><td>Competencia por encima del promedio. Fortaleza a potenciar.</td></tr>
+  <tr><td><strong>Destacado</strong></td><td>≥ 65</td><td>&gt; 93</td><td>Competencia sobresaliente. Potencial para mentoría y referencia interna.</td></tr>
+</table>
+
+<!-- CHAPTER 6 -->
+<h2 id="cap6">6. Procedimiento de administración</h2>
+
+<h3>6.1 Requisitos del administrador</h3>
+<ul>
+  <li>Profesional con formación en psicología organizacional, gestión del talento humano o área afín.</li>
+  <li>Conocimiento básico de psicometría y modelos de competencias.</li>
+  <li>Capacitación específica en el instrumento EID-GTI (incluida con la licencia).</li>
+</ul>
+
+<h3>6.2 Condiciones de aplicación</h3>
+<table>
+  <tr><th>Condición</th><th>Requisito</th></tr>
+  <tr><td>Modalidad</td><td>En línea (autoadministrada con supervisión)</td></tr>
+  <tr><td>Dispositivo</td><td>Computadora, tablet o smartphone con conexión a internet</td></tr>
+  <tr><td>Navegador</td><td>Chrome, Firefox, Safari o Edge (versiones actualizadas)</td></tr>
+  <tr><td>Ambiente</td><td>Silencioso, sin interrupciones, con privacidad visual</td></tr>
+  <tr><td>Tiempo límite</td><td>No hay límite de tiempo, pero se recomienda completar en una sola sesión (25-35 min)</td></tr>
+  <tr><td>Idioma</td><td>Español (LATAM)</td></tr>
+</table>
+
+<h3>6.3 Instrucciones para el evaluado</h3>
+<p>Las instrucciones se presentan en pantalla antes de cada sección. El evaluado debe:</p>
+<ol>
+  <li>Leer y aceptar el consentimiento informado.</li>
+  <li>Completar sus datos (nombre, empresa, cargo, país, nivel organizacional, sector).</li>
+  <li>Responder la Sección 1 (DISC) seleccionando una frase como "más" y otra como "menos" descriptiva por bloque.</li>
+  <li>Responder la Sección 2 (Competencias) calificando la frecuencia de cada comportamiento en su trabajo actual.</li>
+</ol>
+
+<h3>6.4 Instrucciones clave a comunicar verbalmente</h3>
+<ul>
+  <li>"No hay respuestas correctas ni incorrectas."</li>
+  <li>"Piense en cómo usted actúa realmente, no en cómo debería actuar."</li>
+  <li>"Responda pensando en su trabajo actual, no en un trabajo ideal."</li>
+  <li>"Si duda entre dos opciones, elija la primera que le vino a la mente."</li>
+  <li>"Complete la evaluación sin pausas prolongadas."</li>
+</ul>
+
+<h3>6.5 Situaciones especiales</h3>
+<table>
+  <tr><th>Situación</th><th>Protocolo</th></tr>
+  <tr><td>El evaluado no completa la evaluación</td><td>Los resultados parciales no son válidos. Reprogramar la sesión.</td></tr>
+  <tr><td>Tiempo excesivo (>60 min)</td><td>Verificar condiciones del ambiente. Considerar re-aplicación.</td></tr>
+  <tr><td>Bandera de consistencia activada</td><td>Interpretar con cautela. Considerar entrevista complementaria.</td></tr>
+  <tr><td>Aplicación para selección externa</td><td>Mayor probabilidad de deseabilidad social. Ponderar con entrevista por competencias.</td></tr>
+  <tr><td>Aplicación para desarrollo interno</td><td>Menor presión social. Resultados más confiables para plan de desarrollo.</td></tr>
+</table>
+
+<!-- CHAPTER 7 -->
+<h2 id="cap7">7. Sistema de calificación</h2>
+
+<h3>7.1 Calificación DISC</h3>
+<p><strong>Paso 1: Tabulación de respuestas</strong></p>
+<p>Para cada bloque (1-28), se registra qué dimensión fue seleccionada como "Más" (+) y cuál como "Menos" (-).</p>
+
+<p><strong>Paso 2: Suma por dimensión</strong></p>
+<ul>
+  <li><strong>Puntaje M (Más/Máscara):</strong> Cantidad de veces que cada dimensión fue seleccionada como "Más descriptiva". Rango: 0-28.</li>
+  <li><strong>Puntaje L (Menos/Núcleo):</strong> Cantidad de veces que cada dimensión fue seleccionada como "Menos descriptiva". Rango: 0-28.</li>
+  <li><strong>Puntaje Diferencia (D=M-L):</strong> Indicador principal de la tendencia conductual. Rango: -28 a +28.</li>
+</ul>
+<p>Nota: La suma de todos los puntajes M = 28 y la suma de todos los puntajes L = 28 (ipsativos).</p>
+
+<p><strong>Paso 3: Conversión a percentiles</strong></p>
+<p>Usando los parámetros normativos LATAM, se convierte cada puntaje Diferencia a percentil mediante la distribución normal acumulada. Los percentiles se acotan al rango 1-99.</p>
+
+<p><strong>Paso 4: Conversión a T-Score</strong></p>
+<div class="formula">T = 50 + 10 × (Diferencia - Media_dimensión) / SD_dimensión</div>
+
+<p><strong>Paso 5: Identificación del perfil</strong></p>
+<ul>
+  <li><strong>Dimensión primaria:</strong> La de mayor percentil.</li>
+  <li><strong>Dimensión secundaria:</strong> La segunda de mayor percentil, siempre que sea ≥ 55.</li>
+  <li><strong>Tipo de perfil:</strong> Si la secundaria califica, el perfil es bicombinado (ej. "DI", "SC"). Si no, es puro (ej. "D", "S").</li>
+</ul>
+
+<h3>7.2 Calificación de Competencias</h3>
+<p><strong>Paso 1:</strong> Sumar las respuestas de los 5 ítems de cada competencia. Rango: 5-25.</p>
+<p><strong>Paso 2:</strong> Convertir a T-Score usando los parámetros normativos.</p>
+<p><strong>Paso 3:</strong> Convertir a percentil.</p>
+<p><strong>Paso 4:</strong> Clasificar en nivel de competencia (Crítico → Destacado).</p>
+
+<h3>7.3 Control de consistencia</h3>
+<p>Sumar las respuestas ≥ 4 en los 3 ítems de consistencia. Si la suma es ≥ 2, se activa la bandera de precaución.</p>
+
+<!-- CHAPTER 8 -->
+<h2 id="cap8">8. Guía de interpretación DISC</h2>
+
+<h3>8.1 Interpretación por dimensión</h3>
+
+<p><strong><span class="badge badge-d">D</span> Dominancia (alta: percentil ≥ 60)</strong></p>
+<p>Personas con D alta tienden a ser directas, decididas y orientadas a resultados. Buscan el control, aceptan desafíos y se enfocan en la eficiencia. En liderazgo, establecen expectativas claras y empujan al equipo. Bajo presión, pueden volverse impacientes, controladores y descuidar las relaciones.</p>
+<p><em>En selección:</em> Buscar para roles que requieran toma de decisiones rápida, gestión de resultados y autonomía.<br>
+<em>En desarrollo:</em> Trabajar habilidades de escucha, paciencia y construcción de relaciones.</p>
+
+<p><strong><span class="badge badge-i">I</span> Influencia (alta: percentil ≥ 60)</strong></p>
+<p>Personas con I alta tienden a ser sociables, entusiastas y persuasivas. Generan ambientes positivos, conectan fácilmente con otros y se motivan por el reconocimiento. En liderazgo, inspiran a través del carisma. Bajo presión, pueden desorganizarse y prometer más de lo que cumplen.</p>
+<p><em>En selección:</em> Buscar para roles comerciales, de comunicación, facilitación y relaciones públicas.<br>
+<em>En desarrollo:</em> Trabajar organización, seguimiento a compromisos y profundidad analítica.</p>
+
+<p><strong><span class="badge badge-s">S</span> Estabilidad (alta: percentil ≥ 60)</strong></p>
+<p>Personas con S alta tienden a ser pacientes, confiables y leales. Valoran la armonía, la consistencia y las relaciones duraderas. En liderazgo, lideran con el ejemplo y generan confianza. Bajo presión, pueden volverse pasivos y resistirse al cambio.</p>
+<p><em>En selección:</em> Buscar para roles de soporte, servicio, administración y trabajo en equipo estable.<br>
+<em>En desarrollo:</em> Trabajar asertividad, tolerancia al cambio y toma de riesgos.</p>
+
+<p><strong><span class="badge badge-c">C</span> Cumplimiento (alta: percentil ≥ 60)</strong></p>
+<p>Personas con C alta tienden a ser precisas, analíticas y orientadas a la calidad. Valoran los estándares, los datos y los procesos. En liderazgo, generan credibilidad técnica. Bajo presión, pueden volverse perfeccionistas y aislarse.</p>
+<p><em>En selección:</em> Buscar para roles de análisis, control de calidad, finanzas y auditoría.<br>
+<em>En desarrollo:</em> Trabajar velocidad de decisión, tolerancia a la ambigüedad y comunicación interpersonal.</p>
+
+<h3>8.2 Interpretación de perfiles combinados</h3>
+<p>Cuando el evaluado presenta dos dimensiones con percentiles ≥ 55, el perfil combinado revela un estilo más matizado. Ejemplos:</p>
+
+<table>
+  <tr><th>Perfil</th><th>Descripción breve</th><th>Rol típico</th></tr>
+  <tr><td>DI</td><td>Líder carismático orientado a resultados</td><td>Director comercial, gerente de ventas</td></tr>
+  <tr><td>DC</td><td>Estratega analítico con fuerte orientación al logro</td><td>Director financiero, gerente de proyecto</td></tr>
+  <tr><td>DS</td><td>Líder firme pero considerado con el equipo</td><td>Gerente de operaciones</td></tr>
+  <tr><td>ID</td><td>Comunicador dinámico que busca resultados</td><td>Marketing, desarrollo de negocios</td></tr>
+  <tr><td>IS</td><td>Facilitador cálido y sociable</td><td>RRHH, capacitación, servicio al cliente</td></tr>
+  <tr><td>IC</td><td>Comunicador que valora la calidad y los datos</td><td>Consultor, investigador de mercados</td></tr>
+  <tr><td>SD</td><td>Ejecutor confiable con determinación</td><td>Supervisor, coordinador de equipo</td></tr>
+  <tr><td>SI</td><td>Colaborador empático y sociable</td><td>Trabajo social organizacional, bienestar</td></tr>
+  <tr><td>SC</td><td>Trabajador metódico, paciente y preciso</td><td>Contabilidad, administración, calidad</td></tr>
+  <tr><td>CD</td><td>Analista con determinación para implementar</td><td>Auditor, control interno, TI</td></tr>
+  <tr><td>CI</td><td>Experto que comunica con claridad</td><td>Capacitador técnico, consultor especializado</td></tr>
+  <tr><td>CS</td><td>Especialista confiable y orientado a la calidad</td><td>Soporte técnico, documentación, regulación</td></tr>
+</table>
+
+<!-- CHAPTER 9 -->
+<h2 id="cap9">9. Guía de interpretación de competencias</h2>
+
+<h3>9.1 Interpretación por nivel</h3>
+<ul>
+  <li><strong>Destacado (T ≥ 65):</strong> La persona demuestra la competencia de manera consistente y sobresaliente. Candidata natural para mentoría, referencia interna o liderazgo de proyectos en esa competencia.</li>
+  <li><strong>Avanzado (T 55-64):</strong> La persona demuestra la competencia frecuentemente y por encima del promedio. Fortaleza que puede ser potenciada con asignaciones retadoras.</li>
+  <li><strong>Competente (T 45-54):</strong> Nivel esperado para un desempeño adecuado. No requiere intervención salvo que el cargo demande un nivel superior.</li>
+  <li><strong>En Desarrollo (T 35-44):</strong> La competencia se manifiesta con menor frecuencia que el promedio. Incluir en el plan de desarrollo individual con acciones concretas.</li>
+  <li><strong>Crítico (T &lt; 35):</strong> La competencia se manifiesta rara vez. Requiere intervención prioritaria: capacitación específica, coaching o reasignación de funciones.</li>
+</ul>
+
+<h3>9.2 Análisis de brechas</h3>
+<p>Para cada cargo, se recomienda definir un "perfil ideal de competencias" (nivel mínimo esperado por competencia). La brecha entre el perfil real y el ideal indica las prioridades de desarrollo:</p>
+<div class="formula">Brecha = T-Score ideal - T-Score real</div>
+<p>Brechas > 10 puntos T requieren acción inmediata. Brechas de 5-10 puntos T se abordan en el plan de desarrollo a mediano plazo.</p>
+
+<!-- CHAPTER 10 -->
+<h2 id="cap10">10. Integración DISC + Competencias</h2>
+
+<h3>10.1 Lógica de integración</h3>
+<p>El valor diferencial de este instrumento está en la integración de ambas secciones:</p>
+<ul>
+  <li><strong>DISC:</strong> Responde a "CÓMO" la persona tiende a comportarse (estilo conductual innato/adaptado).</li>
+  <li><strong>Competencias:</strong> Responde a "QUÉ TAN BIEN" la persona ejecuta comportamientos críticos para el desempeño.</li>
+</ul>
+<p>La combinación permite diagnosticar no solo las capacidades actuales, sino el potencial de desarrollo basado en la afinidad natural entre el estilo conductual y las competencias requeridas.</p>
+
+<h3>10.2 Matriz de afinidad DISC-Competencia</h3>
+<p>Cada dimensión DISC tiene competencias con las que presenta afinidad natural (más fáciles de desarrollar) y competencias que representan mayor desafío:</p>
+<table>
+  <tr><th>Dimensión DISC</th><th>Competencias con afinidad natural</th><th>Competencias que representan mayor desafío</th></tr>
+  <tr><td><span class="badge badge-d">D</span></td><td>OR, TD, PE</td><td>TC, CE, AD</td></tr>
+  <tr><td><span class="badge badge-i">I</span></td><td>CE, LP, OC</td><td>PA, OP, CM</td></tr>
+  <tr><td><span class="badge badge-s">S</span></td><td>TC, IE, OC</td><td>PE, TD, OR</td></tr>
+  <tr><td><span class="badge badge-c">C</span></td><td>PA, CM, OP</td><td>LP, CE, AD</td></tr>
+</table>
+
+<h3>10.3 Interpretación integrada</h3>
+<p>Al analizar los resultados combinados, busque:</p>
+<ol>
+  <li><strong>Alineamiento fortaleza-estilo:</strong> ¿Las competencias más altas coinciden con la afinidad natural del estilo DISC? Si sí, el perfil está optimizado. Si las fortalezas están en áreas de "desafío" del DISC, la persona ha desarrollado habilidades contra su tendencia natural — un indicador de alto potencial de adaptación.</li>
+  <li><strong>Brechas críticas:</strong> ¿Hay competencias de afinidad natural que estén en nivel bajo? Esto sugiere un problema de oportunidad, no de capacidad — la persona tiene la predisposición conductual pero no ha tenido contextos para desarrollar la competencia.</li>
+  <li><strong>Coherencia del perfil:</strong> Un perfil donde todo está "Alto" o todo está "Bajo" merece escrutinio. Puede indicar deseabilidad social (todo alto) o desmotivación/ambiente tóxico (todo bajo).</li>
+</ol>
+
+<!-- CHAPTER 11 -->
+<h2 id="cap11">11. Consideraciones éticas y legales</h2>
+
+<h3>11.1 Principios éticos</h3>
+<ul>
+  <li><strong>Consentimiento informado:</strong> Toda aplicación debe estar precedida por el consentimiento informado del evaluado, que incluye el propósito, la confidencialidad y el uso que se dará a los resultados.</li>
+  <li><strong>Confidencialidad:</strong> Los resultados individuales son información sensible protegida por la Ley N° 8968 de Protección de Datos Personales (Costa Rica) y normativas equivalentes en cada país.</li>
+  <li><strong>No discriminación:</strong> Los resultados DISC no deben usarse como criterio único de selección, ni para discriminar por perfil conductual. Todos los perfiles son igualmente válidos.</li>
+  <li><strong>Interpretación calificada:</strong> Los resultados deben ser interpretados por un profesional calificado, nunca entregados en crudo al evaluado o a terceros sin contexto.</li>
+  <li><strong>Retroalimentación:</strong> El evaluado tiene derecho a conocer sus resultados y a recibir retroalimentación sobre su perfil.</li>
+</ul>
+
+<h3>11.2 Marco legal por país</h3>
+<table>
+  <tr><th>País</th><th>Marco legal aplicable</th></tr>
+  <tr><td>Costa Rica</td><td>Ley N° 8968 / PRODHAB</td></tr>
+  <tr><td>México</td><td>LFPDPPP (Ley Federal de Protección de Datos Personales)</td></tr>
+  <tr><td>Colombia</td><td>Ley 1581 de 2012 / Decreto 1377 de 2013</td></tr>
+  <tr><td>Panamá</td><td>Ley 81 de 2019</td></tr>
+  <tr><td>Guatemala</td><td>No hay ley específica (art. 31 Constitución)</td></tr>
+  <tr><td>Chile</td><td>Ley 19.628 (actualizada 2024)</td></tr>
+  <tr><td>Perú</td><td>Ley 29733</td></tr>
+  <tr><td>Argentina</td><td>Ley 25.326</td></tr>
+</table>
+
+<h3>11.3 Almacenamiento y retención de datos</h3>
+<ul>
+  <li>Los datos personales y resultados deben almacenarse en servidores con cifrado en reposo y en tránsito.</li>
+  <li>Período de retención recomendado: hasta 2 años después de la última aplicación, o según la política de retención de la empresa cliente.</li>
+  <li>El evaluado puede solicitar la eliminación de sus datos en cualquier momento.</li>
+  <li>Los datos agregados (sin identificación personal) pueden conservarse indefinidamente para fines de mejora del instrumento y actualización de baremos.</li>
+</ul>
+
+<!-- CHAPTER 12 -->
+<h2 id="cap12">12. Plan de validación de campo</h2>
+
+<div class="note note-success"><strong>Este capítulo es la hoja de ruta</strong> para convertir los baremos provisionales en baremos empíricos propios, y para documentar las propiedades psicométricas reales del instrumento.</div>
+
+<h3>12.1 Estudio de normativización</h3>
+<table>
+  <tr><th>Elemento</th><th>Requisito</th></tr>
+  <tr><td>Muestra mínima</td><td>N = 200 (ideal: N ≥ 400 para subgrupos por país, nivel, sector)</td></tr>
+  <tr><td>Composición</td><td>Adultos (18+) en empleo formal, distribución equilibrada por género, nivel organizacional y sector. Mínimo 3 países LATAM representados.</td></tr>
+  <tr><td>Método</td><td>Aplicación estándar del EID-GTI completo en condiciones controladas (ver Cap. 6)</td></tr>
+  <tr><td>Análisis</td><td>Estadísticos descriptivos por dimensión y competencia, pruebas de normalidad, cálculo de percentiles empíricos.</td></tr>
+  <tr><td>Resultado</td><td>Tablas de percentiles por país, nivel organizacional y sector. Actualización de parámetros M y SD.</td></tr>
+</table>
+
+<h3>12.2 Estudio de confiabilidad</h3>
+<table>
+  <tr><th>Tipo</th><th>Muestra</th><th>Método</th><th>Criterio de aceptación</th></tr>
+  <tr><td>Consistencia interna</td><td>N ≥ 200</td><td>Cronbach's α por dimensión DISC y por competencia</td><td>α ≥ 0.70</td></tr>
+  <tr><td>Test-retest</td><td>N ≥ 50</td><td>Re-aplicación a 2-4 semanas. Correlación de Pearson.</td><td>r ≥ 0.75</td></tr>
+  <tr><td>Consistencia inter-ítems</td><td>N ≥ 200</td><td>Correlación ítem-total corregida</td><td>r ≥ 0.30 por ítem</td></tr>
+</table>
+
+<h3>12.3 Estudio de validez</h3>
+<table>
+  <tr><th>Tipo</th><th>Método</th><th>Criterio</th></tr>
+  <tr><td>Validez de constructo</td><td>Análisis Factorial Confirmatorio (AFC) con modelo DISC de 4 factores y modelo de competencias de 12 factores/4 clusters</td><td>CFI ≥ 0.90, RMSEA ≤ 0.08, SRMR ≤ 0.08</td></tr>
+  <tr><td>Validez convergente</td><td>Correlación con otro instrumento DISC validado</td><td>r ≥ 0.60 por dimensión</td></tr>
+  <tr><td>Validez de criterio</td><td>Correlación con evaluaciones de desempeño del supervisor</td><td>r ≥ 0.30 (criterio concurrente)</td></tr>
+  <tr><td>Validez discriminante</td><td>Correlación entre factores no relacionados</td><td>r &lt; 0.30 entre factores que no deberían correlacionar</td></tr>
+</table>
+
+<h3>12.4 Cronograma sugerido</h3>
+<table>
+  <tr><th>Fase</th><th>Duración</th><th>Actividad</th></tr>
+  <tr><td>1</td><td>Meses 1-2</td><td>Aplicación piloto (N=30-50). Ajuste de ítems problemáticos.</td></tr>
+  <tr><td>2</td><td>Meses 3-5</td><td>Aplicación a muestra normativa (N=200-400).</td></tr>
+  <tr><td>3</td><td>Mes 6</td><td>Análisis estadístico y cálculo de baremos empíricos.</td></tr>
+  <tr><td>4</td><td>Mes 7</td><td>Estudio test-retest (submuestra N=50).</td></tr>
+  <tr><td>5</td><td>Mes 8</td><td>Informe de validación y actualización de este manual.</td></tr>
+</table>
+
+<!-- CHAPTER 13 -->
+<h2 id="cap13">13. Referencias bibliográficas</h2>
+
+<div class="ref">Boyatzis, R.E. (1982). <em>The Competent Manager: A Model for Effective Performance</em>. New York: Wiley.</div>
+<div class="ref">Cronbach, L.J. (1951). Coefficient alpha and the internal structure of tests. <em>Psychometrika</em>, 16(3), 297-334.</div>
+<div class="ref">Kaplan, R.M. & Saccuzzo, D.P. (2018). <em>Psychological Testing: Principles, Applications, and Issues</em> (9th ed.). Boston: Cengage.</div>
+<div class="ref">Marston, W.M. (1928). <em>Emotions of Normal People</em>. New York: Harcourt, Brace & Co.</div>
+<div class="ref">McClelland, D.C. (1973). Testing for competence rather than for "intelligence". <em>American Psychologist</em>, 28(1), 1-14.</div>
+<div class="ref">Nunnally, J.C. & Bernstein, I.H. (1994). <em>Psychometric Theory</em> (3rd ed.). New York: McGraw-Hill.</div>
+<div class="ref">Scullard, M. & Baum, D. (2015). <em>Everything DiSC Manual</em>. Minneapolis: Wiley.</div>
+<div class="ref">Spencer, L.M. & Spencer, S.M. (1993). <em>Competence at Work: Models for Superior Performance</em>. New York: Wiley.</div>
+<div class="ref">Standards for Educational and Psychological Testing (2014). AERA, APA, NCME. Washington, DC.</div>
+
+<!-- ANNEXES -->
+<h2 id="anexoA">Anexo A: Tablas de baremos completos</h2>
+
+<h3>A.1 Baremos DISC — Tabla de conversión puntaje bruto a percentil (provisional LATAM)</h3>
+<table>
+  <tr><th>Puntaje Diferencia (M-L)</th><th>D Percentil</th><th>I Percentil</th><th>S Percentil</th><th>C Percentil</th></tr>
+  <tr><td>-15 o menos</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+  <tr><td>-12</td><td>1</td><td>1</td><td>1</td><td>2</td></tr>
+  <tr><td>-10</td><td>2</td><td>1</td><td>1</td><td>4</td></tr>
+  <tr><td>-8</td><td>4</td><td>2</td><td>2</td><td>9</td></tr>
+  <tr><td>-6</td><td>9</td><td>4</td><td>5</td><td>16</td></tr>
+  <tr><td>-4</td><td>16</td><td>10</td><td>12</td><td>26</td></tr>
+  <tr><td>-2</td><td>26</td><td>18</td><td>21</td><td>39</td></tr>
+  <tr><td>0</td><td>39</td><td>31</td><td>34</td><td>54</td></tr>
+  <tr><td>2</td><td>54</td><td>46</td><td>50</td><td>68</td></tr>
+  <tr><td>4</td><td>68</td><td>62</td><td>66</td><td>79</td></tr>
+  <tr><td>6</td><td>79</td><td>76</td><td>79</td><td>88</td></tr>
+  <tr><td>8</td><td>88</td><td>86</td><td>88</td><td>94</td></tr>
+  <tr><td>10</td><td>94</td><td>93</td><td>95</td><td>97</td></tr>
+  <tr><td>12</td><td>97</td><td>97</td><td>98</td><td>99</td></tr>
+  <tr><td>15 o más</td><td>99</td><td>99</td><td>99</td><td>99</td></tr>
+</table>
+
+<h3>A.2 Baremos de Competencias — Tabla de conversión puntaje bruto a T-Score y nivel</h3>
+<table>
+  <tr><th>Puntaje Bruto (5-25)</th><th>T-Score</th><th>Percentil</th><th>Nivel</th></tr>
+  <tr><td>5-8</td><td>21-21</td><td>1</td><td>Crítico</td></tr>
+  <tr><td>9-10</td><td>27-27</td><td>1-2</td><td>Crítico</td></tr>
+  <tr><td>11-12</td><td>30-33</td><td>3-5</td><td>Crítico</td></tr>
+  <tr><td>13</td><td>36</td><td>8</td><td>En Desarrollo</td></tr>
+  <tr><td>14</td><td>39</td><td>13</td><td>En Desarrollo</td></tr>
+  <tr><td>15</td><td>41</td><td>18</td><td>En Desarrollo</td></tr>
+  <tr><td>16</td><td>44</td><td>27</td><td>En Desarrollo</td></tr>
+  <tr><td>17</td><td>47</td><td>37</td><td>Competente</td></tr>
+  <tr><td>18</td><td>50</td><td>50</td><td>Competente</td></tr>
+  <tr><td>19</td><td>53</td><td>62</td><td>Competente</td></tr>
+  <tr><td>20</td><td>56</td><td>73</td><td>Avanzado</td></tr>
+  <tr><td>21</td><td>59</td><td>82</td><td>Avanzado</td></tr>
+  <tr><td>22</td><td>61</td><td>86</td><td>Avanzado</td></tr>
+  <tr><td>23</td><td>64</td><td>92</td><td>Avanzado</td></tr>
+  <tr><td>24</td><td>67</td><td>96</td><td>Destacado</td></tr>
+  <tr><td>25</td><td>70</td><td>98</td><td>Destacado</td></tr>
+</table>
+
+<h2 id="anexoB">Anexo B: Catálogo completo de ítems</h2>
+<p>El catálogo completo de los 112 ítems DISC (28 bloques × 4) y los 63 ítems de competencias (60 + 3 de consistencia) se encuentra embebido en el código fuente de la aplicación EID-GTI. Cada ítem incluye su código de dimensión/competencia y posición en el instrumento.</p>
+<div class="note note-warning"><strong>Material confidencial:</strong> El catálogo de ítems es propiedad intelectual de GTI. No debe distribuirse fuera del equipo de profesionales autorizados para administrar el instrumento.</div>
+
+<h2 id="anexoC">Anexo C: Perfiles DISC — Guía rápida de interpretación</h2>
+
+<table>
+  <tr><th>Perfil</th><th>Palabras clave</th><th>Fortalezas</th><th>Bajo presión</th><th>Roles ideales</th></tr>
+  <tr><td><span class="badge badge-d">D</span></td><td>Directo, decidido, competitivo</td><td>Toma de decisiones, resultados, autonomía</td><td>Impaciente, controlador, confrontativo</td><td>Dirección, ventas, emprendimiento</td></tr>
+  <tr><td><span class="badge badge-i">I</span></td><td>Sociable, entusiasta, persuasivo</td><td>Comunicación, motivación, creatividad</td><td>Desorganizado, impulsivo, evita conflictos</td><td>Marketing, RRHH, capacitación</td></tr>
+  <tr><td><span class="badge badge-s">S</span></td><td>Paciente, confiable, leal</td><td>Escucha, trabajo en equipo, constancia</td><td>Pasivo, resistente al cambio, acumula</td><td>Servicio, administración, soporte</td></tr>
+  <tr><td><span class="badge badge-c">C</span></td><td>Preciso, analítico, sistemático</td><td>Calidad, análisis, planificación</td><td>Perfeccionista, rígido, defensivo</td><td>Finanzas, auditoría, TI, calidad</td></tr>
+</table>
+
+<div class="footer">
+  <strong>Manual Técnico y de Administración — EID-GTI v1.0</strong><br>
+  © 2026 GTI — Gestión del Talento e Innovación, Costa Rica<br>
+  gticr.net | rbustamante@efhcr.com<br>
+  Documento confidencial — Prohibida su reproducción sin autorización
+</div>
+
+</div>
