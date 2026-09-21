@@ -1130,7 +1130,7 @@ function switchToBrief(){
 }
 
 function generateDISCRadar(d){
-  const size = 400;
+  const size = 500;
   const cx = size/2, cy = size/2;
   const maxR = 120;
   const dims = ['D','I','S','C'];
@@ -1182,9 +1182,9 @@ function generateDISCRadar(d){
 function generateCompRadar(compScores){
   const comps = Object.values(compScores);
   const n = comps.length;
-  const size = 500;
+  const size = 600;
   const cx = size/2, cy = size/2;
-  const maxR = 140;
+  const maxR = 150;
 
   let svg = `<svg viewBox="0 0 ${size} ${size}" width="${size}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">`;
 
