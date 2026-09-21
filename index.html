@@ -149,11 +149,11 @@ table.data tr:hover td{background:rgba(27,54,93,0.03)}
       <div class="consent-box">
         <p><strong>AVISO DE CONFIDENCIALIDAD Y CONSENTIMIENTO INFORMADO</strong></p>
         <p><strong>Propósito:</strong> Esta evaluación tiene como objetivo obtener un perfil conductual y de competencias laborales con fines de selección, desarrollo o diagnóstico organizacional. Los resultados serán utilizados exclusivamente por el profesional de recursos humanos o el consultor autorizado que administra esta evaluación.</p>
-        <p><strong>Confidencialidad:</strong> Sus respuestas son estrictamente confidenciales. Los datos recopilados serán tratados conforme a la Ley N° 8968 de Protección de la Persona frente al Tratamiento de sus Datos Personales (Costa Rica) y normativas equivalentes aplicables en su país de residencia. La información no será compartida con terceros sin su autorización expresa.</p>
+        <p><strong>Confidencialidad:</strong> Sus respuestas son estrictamente confidenciales. Los datos recopilados serán tratados conforme a la legislación vigente de protección de datos personales aplicable en su país de residencia. La información no será compartida con terceros sin su autorización expresa.</p>
         <p><strong>Naturaleza de la evaluación:</strong> No existen respuestas correctas o incorrectas. El instrumento mide preferencias conductuales y frecuencia de comportamientos laborales. Se solicita que responda con honestidad para obtener un perfil válido y útil.</p>
         <p><strong>Uso de resultados:</strong> Los resultados generan un perfil descriptivo, no un diagnóstico clínico. Deben ser interpretados por un profesional calificado en evaluación psicométrica. No constituyen por sí solos una decisión de contratación, promoción o desvinculación.</p>
         <p><strong>Participación voluntaria:</strong> Su participación es voluntaria. Puede abandonar la evaluación en cualquier momento sin consecuencias. Al aceptar, confirma que ha leído y comprendido esta información.</p>
-        <p><strong>Responsable del tratamiento:</strong> GTI — Gestión del Talento e Innovación, San José, Costa Rica. Contacto: rbustamante@efhcr.com</p>
+        <p><strong>Responsable del tratamiento:</strong> La empresa u organización que administra esta evaluación es responsable del tratamiento de sus datos personales. Para consultas sobre el manejo de su información, contacte directamente al área de recursos humanos de dicha organización.</p>
       </div>
       <label class="check-label">
         <input type="checkbox" id="consent-check" onchange="document.getElementById('consent-btn').disabled=!this.checked">
@@ -286,11 +286,11 @@ table.data tr:hover td{background:rgba(27,54,93,0.03)}
       <p>A continuación encontrará <strong>63 afirmaciones</strong> sobre comportamientos laborales, organizadas en 4 áreas.</p>
       <p>Para cada afirmación, indique <strong>con qué frecuencia</strong> usted demuestra ese comportamiento en su trabajo actual:</p>
       <table class="data" style="max-width:500px">
-        <tr><td style="font-weight:700;width:40px">1</td><td>Nunca o casi nunca</td></tr>
+        <tr><td style="font-weight:700;width:40px">1</td><td>Nunca</td></tr>
         <tr><td style="font-weight:700">2</td><td>Pocas veces</td></tr>
         <tr><td style="font-weight:700">3</td><td>Algunas veces</td></tr>
         <tr><td style="font-weight:700">4</td><td>Frecuentemente</td></tr>
-        <tr><td style="font-weight:700">5</td><td>Siempre o casi siempre</td></tr>
+        <tr><td style="font-weight:700">5</td><td>Siempre</td></tr>
       </table>
       <div class="alert alert-warning"><strong>Importante:</strong> Responda según lo que HACE, no lo que cree que debería hacer. Sea honesto — un perfil preciso es más útil que uno idealizado.</div>
       <div class="btn-group" style="justify-content:center">
@@ -322,10 +322,23 @@ table.data tr:hover td{background:rgba(27,54,93,0.03)}
 
   <!-- SCREEN: Report -->
   <div class="screen" id="screen-report">
-    <div id="report-content"></div>
+    <div id="report-brief"></div>
+    <div id="report-full" style="display:none"></div>
+    <div id="evaluator-access" class="no-print" style="margin-top:24px;text-align:center">
+      <div class="card" style="max-width:480px;margin:0 auto;border-top:3px solid var(--acc)">
+        <h3 style="margin-top:0">Acceso Evaluador</h3>
+        <p style="font-size:0.9em;color:var(--text-2)">El reporte integral detallado está disponible exclusivamente para el evaluador o reclutador autorizado.</p>
+        <div style="display:flex;gap:8px;justify-content:center;align-items:center">
+          <input type="password" id="evaluator-code" placeholder="Código de acceso" style="padding:10px 14px;border:1px solid var(--border);border-radius:8px;font-size:1em;width:200px;background:var(--bg-1);color:var(--text-1)">
+          <button class="btn btn-primary" onclick="unlockFullReport()">Ver Reporte Integral</button>
+        </div>
+        <p id="evaluator-error" style="color:var(--acc);font-size:0.85em;margin-top:8px;display:none">Código incorrecto</p>
+      </div>
+    </div>
     <div class="btn-group no-print" style="justify-content:center;margin-top:24px">
       <button class="btn btn-primary" onclick="window.print()">Imprimir / Guardar PDF</button>
       <button class="btn btn-secondary" onclick="downloadJSON()">Descargar datos (JSON)</button>
+      <button id="btn-back-brief" class="btn btn-outline" onclick="switchToBrief()" style="display:none">Volver al Resumen</button>
       <button class="btn btn-outline" onclick="showScreen('screen-welcome')">Nueva evaluación</button>
     </div>
   </div>
@@ -787,7 +800,7 @@ function renderCompetencyItems(){
 }
 
 function renderLikertItem(num, text, key){
-  const labels = ['Nunca o casi nunca','Pocas veces','Algunas veces','Frecuentemente','Siempre o casi siempre'];
+  const labels = ['Nunca','Pocas veces','Algunas veces','Frecuentemente','Siempre'];
   let html = `<div class="likert-item"><div class="likert-text">${num}. ${text}</div><div class="likert-scale">`;
   for(let v=1;v<=5;v++){
     const sel = (state.compResponses[key] === v) ? ' selected' : '';
@@ -927,13 +940,16 @@ function generateReport(){
   const countryNames = {CR:'Costa Rica',MX:'México',GT:'Guatemala',SV:'El Salvador',HN:'Honduras',NI:'Nicaragua',PA:'Panamá',CO:'Colombia',PE:'Perú',EC:'Ecuador',CL:'Chile',AR:'Argentina',DO:'Rep. Dominicana',PR:'Puerto Rico',UY:'Uruguay',PY:'Paraguay',BO:'Bolivia',VE:'Venezuela',OTHER:'Otro'};
   const levelNames = {directivo:'Directivo / C-Level',gerencia:'Gerencia',jefatura:'Jefatura / Coordinación',profesional:'Profesional / Especialista',operativo:'Operativo / Técnico',asistente:'Asistente / Auxiliar'};
 
-  let html = '';
+  const prof = DISC_PROFILES[d.primary];
+  const prof2 = DISC_PROFILES[d.secondary];
+  const compArr = Object.values(r.competencies);
+  const strengths = compArr.filter(c=>c.tScore>=55).sort((a,b)=>b.tScore-a.tScore);
+  const gaps = compArr.filter(c=>c.tScore<45).sort((a,b)=>a.tScore-b.tScore);
 
-  // Header
-  html += `<div class="card" style="text-align:center;border-top:4px solid var(--pri)">
+  const headerHtml = `<div class="card" style="text-align:center;border-top:4px solid var(--pri)">
     <div style="font-size:1.6em;font-weight:800;color:var(--pri)">GTI</div>
     <div style="font-size:0.85em;color:var(--text-2);margin-bottom:16px">Gestión del Talento e Innovación</div>
-    <h1 style="font-size:1.5em">Reporte de Evaluación Integral de Desempeño</h1>
+    <h1 style="font-size:1.5em">{{TITLE}}</h1>
     <p class="subtitle">DISC + Competencias Organizacionales</p>
     <table class="data" style="max-width:500px;margin:16px auto;text-align:left">
       <tr><td style="font-weight:600;width:40%">Evaluado</td><td>${p.name}</td></tr>
@@ -942,27 +958,55 @@ function generateReport(){
       <tr><td style="font-weight:600">Nivel</td><td>${levelNames[p.level]||p.level}</td></tr>
       <tr><td style="font-weight:600">País</td><td>${countryNames[p.country]||p.country}</td></tr>
       <tr><td style="font-weight:600">Fecha</td><td>${r.date}</td></tr>
-      <tr><td style="font-weight:600">Duración</td><td>${r.timing.total} minutos</td></tr>
     </table>
     ${r.consistency.score >= 2 ? '<div class="alert alert-warning">'+r.consistency.flag+'</div>' : ''}
   </div>`;
 
-  // Executive Summary
-  const prof = DISC_PROFILES[d.primary];
-  const prof2 = DISC_PROFILES[d.secondary];
-  const compArr = Object.values(r.competencies);
-  const strengths = compArr.filter(c=>c.tScore>=55).sort((a,b)=>b.tScore-a.tScore);
-  const gaps = compArr.filter(c=>c.tScore<45).sort((a,b)=>a.tScore-b.tScore);
+  // === BRIEF REPORT (for evaluated person) ===
+  let brief = headerHtml.replace('{{TITLE}}','Resumen de Resultados');
 
-  html += `<div class="card">
+  brief += `<div class="card">
+    <h2>Tu Perfil Conductual</h2>
+    <p>Tu estilo de comportamiento predominante es <strong>${prof.name}</strong>${d.profileType.length>1?' con tendencia <strong>'+prof2.name+'</strong>':''}.</p>
+    <p>${prof.high}</p>
+    <div class="result-grid">
+      ${['D','I','S','C'].map(dim=>{
+        const dp = DISC_PROFILES[dim];
+        const bgAlpha = dim==='D'?'rgba(198,40,40,0.1)':dim==='I'?'rgba(249,168,37,0.12)':dim==='S'?'rgba(46,125,50,0.1)':'rgba(21,101,192,0.1)';
+        return `<div class="result-card" style="background:${bgAlpha}">
+          <div class="score" style="color:${dp.color}">${d.percentiles[dim]}</div>
+          <div class="label" style="color:${dp.color}">${dp.name}</div>
+        </div>`;
+      }).join('')}
+    </div>
+  </div>`;
+
+  brief += `<div class="card">
+    <h2>Aspectos Destacados</h2>
+    ${strengths.length?`<h3>Tus fortalezas principales</h3><ul>${strengths.slice(0,3).map(s=>`<li><strong>${s.name}</strong> — nivel ${s.level}</li>`).join('')}</ul>`:''}
+    ${gaps.length?`<h3>Áreas con oportunidad de desarrollo</h3><ul>${gaps.slice(0,3).map(g=>`<li><strong>${g.name}</strong> — nivel ${g.level}</li>`).join('')}</ul>`:''}
+  </div>`;
+
+  brief += `<div class="card" style="text-align:center;background:var(--bg-2)">
+    <p style="font-size:0.95em;color:var(--text-2);margin:0">El reporte integral con análisis detallado, interpretación completa y plan de desarrollo ha sido entregado a tu evaluador o reclutador, quien te proporcionará retroalimentación personalizada.</p>
+  </div>`;
+
+  brief += `<div class="watermark">
+    GTI Performance Assessment v1.0 — gticr.net<br>
+    Fecha: ${new Date().toLocaleString('es-CR')}
+  </div>`;
+
+  // === FULL REPORT (for evaluator/recruiter) ===
+  let full = headerHtml.replace('{{TITLE}}','Reporte Integral de Evaluación de Desempeño');
+
+  full += `<div class="card">
     <h2>Resumen Ejecutivo</h2>
     <p><strong>${p.name}</strong> presenta un perfil conductual predominante <strong>${prof.name}</strong>${d.profileType.length>1?' con tendencia <strong>'+prof2.name+'</strong>':''}, lo que indica que ${prof.high}</p>
     ${strengths.length?`<p><strong>Competencias destacadas:</strong> ${strengths.slice(0,3).map(s=>s.name).join(', ')}.</p>`:''}
     ${gaps.length?`<p><strong>Áreas de desarrollo prioritarias:</strong> ${gaps.slice(0,3).map(g=>g.name).join(', ')}.</p>`:''}
   </div>`;
 
-  // DISC Profile
-  html += `<div class="card">
+  full += `<div class="card">
     <h2>Perfil Conductual DISC</h2>
     <div class="result-grid">
       ${['D','I','S','C'].map(dim=>{
@@ -987,27 +1031,20 @@ function generateReport(){
     </table>
   </div>`;
 
-  // DISC Interpretation
-  html += `<div class="card">
+  full += `<div class="card">
     <h2>Interpretación del Perfil DISC</h2>
     <h3>Estilo principal: ${prof.name} ${d.profileType.length>1?'/ '+prof2.name:''}</h3>
     <p>${prof.high}</p>
-
     <h3>Fortalezas conductuales</h3>
     <ul>${prof.traits.map(t=>`<li>${t}</li>`).join('')}</ul>
-
     <h3>Estilo de liderazgo</h3>
     <p>${prof.leadership}</p>
-
     <h3>Comportamiento bajo presión</h3>
     <p>${prof.stress}</p>
-
     <h3>Motivadores clave</h3>
     <p>${prof.motivators}</p>
-
     <h3>Entorno de trabajo ideal</h3>
     <p>${prof.environment}</p>
-
     <h3>Estilo de comunicación</h3>
     <p>${prof.comm}</p>
     ${d.profileType.length>1?`
@@ -1016,19 +1053,18 @@ function generateReport(){
     `:''}
   </div>`;
 
-  // Competency Profile
-  html += `<div class="card">
+  full += `<div class="card">
     <h2>Perfil de Competencias Organizacionales</h2>
     <div class="chart-container">${generateCompRadar(r.competencies)}</div>`;
 
   COMP_CLUSTERS.forEach(cluster=>{
-    html += `<h3>${cluster.name}</h3>`;
+    full += `<h3>${cluster.name}</h3>`;
     cluster.competencies.forEach(comp=>{
       const sc = r.competencies[comp.id];
       const levelClass = sc.level==='Crítico'?'critico':sc.level==='En Desarrollo'?'desarrollo':sc.level==='Competente'?'competente':sc.level==='Avanzado'?'avanzado':'destacado';
       const barColor = sc.level==='Crítico'?'#C62828':sc.level==='En Desarrollo'?'#E65100':sc.level==='Competente'?'#1565C0':sc.level==='Avanzado'?'#2E7D32':'#6A1B9A';
       const barWidth = Math.max(5,Math.min(100,(sc.tScore/80)*100));
-      html += `<div class="comp-bar">
+      full += `<div class="comp-bar">
         <span class="name">${sc.name}</span>
         <div class="bar-bg"><div class="bar-fill" style="width:${barWidth}%;background:${barColor}"></div></div>
         <span class="bar-val">T=${sc.tScore}</span>
@@ -1037,7 +1073,7 @@ function generateReport(){
     });
   });
 
-  html += `<h3>Tabla de resultados por competencia</h3>
+  full += `<h3>Tabla de resultados por competencia</h3>
     <table class="data">
       <tr><th>Competencia</th><th>Puntaje Bruto</th><th>T-Score</th><th>Percentil</th><th>Nivel</th></tr>
       ${Object.values(r.competencies).map(c=>{
@@ -1047,58 +1083,56 @@ function generateReport(){
     </table>
   </div>`;
 
-  // Performance Integration
-  html += `<div class="card">
+  full += `<div class="card">
     <h2>Integración DISC + Competencias: Perfil de Desempeño</h2>
     ${generatePerformanceIntegration(d, r.competencies, p)}
   </div>`;
 
-  // Recommendations
-  html += `<div class="card">
+  full += `<div class="card">
     <h2>Recomendaciones de Desarrollo</h2>
     ${generateRecommendations(d, r.competencies, p)}
   </div>`;
 
-  // Technical Sheet
-  html += `<div class="card ficha-tecnica">
-    <h2>Ficha Técnica del Instrumento</h2>
-    <table class="data">
-      <tr><td style="width:35%;font-weight:600">Instrumento</td><td>Evaluación Integral de Desempeño GTI — DISC + Competencias v1.0</td></tr>
-      <tr><td style="font-weight:600">Modelo teórico DISC</td><td>Basado en la teoría de William Moulton Marston (1928). Ítems conductuales originales GTI.</td></tr>
-      <tr><td style="font-weight:600">Marco de competencias</td><td>Marco propio GTI de 12 competencias en 4 clusters. Fundamentado en Spencer & Spencer (1993), Boyatzis (1982) y estándares de competencias laborales LATAM.</td></tr>
-      <tr><td style="font-weight:600">Formato DISC</td><td>28 bloques de elección forzada (más/menos descriptivo). 112 ítems conductuales.</td></tr>
-      <tr><td style="font-weight:600">Formato Competencias</td><td>60 ítems + 3 de consistencia. Escala Likert de frecuencia (1-5).</td></tr>
-      <tr><td style="font-weight:600">Tipo de puntuación DISC</td><td>Ipsativa (elección forzada) → puntajes de Diferencia (Más - Menos) → conversión a percentiles y T-scores.</td></tr>
-      <tr><td style="font-weight:600">Tipo de puntuación Competencias</td><td>Normativa → sumatoria por competencia → conversión a T-scores (M=50, SD=10).</td></tr>
-      <tr><td style="font-weight:600">Baremos</td><td>Provisionales LATAM. Basados en distribuciones típicas de DISC y competencias en muestras corporativas latinoamericanas. Pendiente validación de campo con muestra propia.</td></tr>
-      <tr><td style="font-weight:600">Parámetros normativos DISC</td><td>D: M=1.5, SD=5.5 | I: M=2.5, SD=5.0 | S: M=2.0, SD=5.0 | C: M=-0.5, SD=5.5</td></tr>
-      <tr><td style="font-weight:600">Parámetros normativos Competencias</td><td>M=18.0, SD=3.5 por competencia (rango bruto: 5-25)</td></tr>
-      <tr><td style="font-weight:600">Control de sesgo</td><td>3 ítems de consistencia/deseabilidad social. Umbral: ≥2 respuestas altas = precaución.</td></tr>
-      <tr><td style="font-weight:600">Confiabilidad esperada</td><td>α ≥ 0.70 por dimensión DISC y por competencia (pendiente validación empírica).</td></tr>
-      <tr><td style="font-weight:600">Validez de contenido</td><td>Ítems alineados con constructos teóricos establecidos. Revisión por experto en psicometría organizacional.</td></tr>
-      <tr><td style="font-weight:600">Requiere interpretación por</td><td>Profesional calificado en evaluación psicométrica o gestión del talento humano.</td></tr>
-      <tr><td style="font-weight:600">Propiedad intelectual</td><td>© ${new Date().getFullYear()} GTI — Gestión del Talento e Innovación, Costa Rica. Todos los derechos reservados.</td></tr>
-      <tr><td style="font-weight:600">Contacto</td><td>gticr.net | rbustamante@efhcr.com</td></tr>
-    </table>
-    <p style="margin-top:16px"><strong>Nota sobre baremos:</strong> Los baremos utilizados son provisionales y se basan en distribuciones típicas reportadas en la literatura para poblaciones corporativas latinoamericanas. Para una validación plena, se requiere un estudio de campo con muestra mínima de 200 participantes de la región, que permita calcular propiedades psicométricas reales (Cronbach's α, análisis factorial confirmatorio, estabilidad test-retest) y desarrollar tablas de percentiles con datos empíricos propios.</p>
-  </div>`;
-
-  // Watermark
-  html += `<div class="watermark">
+  full += `<div class="watermark">
     <strong>DOCUMENTO CONFIDENCIAL</strong><br>
     GTI Performance Assessment v1.0 — Propiedad de GTI Costa Rica — gticr.net<br>
     Este reporte fue generado automáticamente y debe ser interpretado por un profesional calificado.<br>
     Fecha de generación: ${new Date().toLocaleString('es-CR')}
   </div>`;
 
-  document.getElementById('report-content').innerHTML = html;
+  document.getElementById('report-brief').innerHTML = brief;
+  document.getElementById('report-full').innerHTML = full;
+  document.getElementById('report-brief').style.display = '';
+  document.getElementById('report-full').style.display = 'none';
+  document.getElementById('evaluator-access').style.display = '';
+  document.getElementById('btn-back-brief').style.display = 'none';
   showScreen('screen-report');
 }
 
+function unlockFullReport(){
+  const code = document.getElementById('evaluator-code').value.trim();
+  if(code === 'GTI2026'){
+    document.getElementById('report-brief').style.display = 'none';
+    document.getElementById('report-full').style.display = '';
+    document.getElementById('evaluator-access').style.display = 'none';
+    document.getElementById('btn-back-brief').style.display = '';
+    document.getElementById('evaluator-error').style.display = 'none';
+  } else {
+    document.getElementById('evaluator-error').style.display = '';
+  }
+}
+
+function switchToBrief(){
+  document.getElementById('report-brief').style.display = '';
+  document.getElementById('report-full').style.display = 'none';
+  document.getElementById('evaluator-access').style.display = '';
+  document.getElementById('btn-back-brief').style.display = 'none';
+}
+
 function generateDISCRadar(d){
-  const size = 300;
+  const size = 400;
   const cx = size/2, cy = size/2;
-  const maxR = 110;
+  const maxR = 120;
   const dims = ['D','I','S','C'];
   const angles = [-Math.PI/2, 0, Math.PI/2, Math.PI];
   const colors = {D:'#C62828',I:'#F9A825',S:'#2E7D32',C:'#1565C0'};
@@ -1110,20 +1144,20 @@ function generateDISCRadar(d){
   for(let r=1;r<=4;r++){
     const radius = maxR*(r/4);
     svg += `<circle cx="${cx}" cy="${cy}" r="${radius}" fill="none" stroke="var(--border)" stroke-width="0.5" stroke-dasharray="${r<4?'3,3':''}"/>`;
-    if(r<4) svg += `<text x="${cx+4}" y="${cy-radius+4}" font-size="8" fill="var(--text-2)">${r*25}</text>`;
+    if(r<4) svg += `<text x="${cx+4}" y="${cy-radius+4}" font-size="9" fill="var(--text-2)">${r*25}</text>`;
   }
-  svg += `<text x="${cx+4}" y="${cy-maxR+4}" font-size="8" fill="var(--text-2)">100</text>`;
+  svg += `<text x="${cx+4}" y="${cy-maxR+4}" font-size="9" fill="var(--text-2)">100</text>`;
 
   // Axes
   dims.forEach((dim,i)=>{
     const x2 = cx + maxR*Math.cos(angles[i]);
     const y2 = cy + maxR*Math.sin(angles[i]);
     svg += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="var(--border)" stroke-width="0.5"/>`;
-    const lx = cx + (maxR+25)*Math.cos(angles[i]);
-    const ly = cy + (maxR+25)*Math.sin(angles[i]);
+    const lx = cx + (maxR+45)*Math.cos(angles[i]);
+    const ly = cy + (maxR+45)*Math.sin(angles[i]);
     const anchor = i===0?'middle':i===1?'start':i===2?'middle':'end';
-    svg += `<text x="${lx}" y="${ly+4}" text-anchor="${anchor}" font-size="11" font-weight="700" fill="${colors[dim]}">${names[dim]}</text>`;
-    svg += `<text x="${lx}" y="${ly+16}" text-anchor="${anchor}" font-size="9" fill="var(--text-2)">P${d.percentiles[dim]}</text>`;
+    svg += `<text x="${lx}" y="${ly+4}" text-anchor="${anchor}" font-size="13" font-weight="700" fill="${colors[dim]}">${names[dim]}</text>`;
+    svg += `<text x="${lx}" y="${ly+18}" text-anchor="${anchor}" font-size="10" fill="var(--text-2)">P${d.percentiles[dim]}</text>`;
   });
 
   // Data polygon
@@ -1148,9 +1182,9 @@ function generateDISCRadar(d){
 function generateCompRadar(compScores){
   const comps = Object.values(compScores);
   const n = comps.length;
-  const size = 360;
+  const size = 500;
   const cx = size/2, cy = size/2;
-  const maxR = 120;
+  const maxR = 140;
 
   let svg = `<svg viewBox="0 0 ${size} ${size}" width="${size}" xmlns="http://www.w3.org/2000/svg" style="max-width:100%">`;
 
@@ -1172,14 +1206,14 @@ function generateCompRadar(compScores){
     const y2 = cy+maxR*Math.sin(angle);
     svg += `<line x1="${cx}" y1="${cy}" x2="${x2}" y2="${y2}" stroke="var(--border)" stroke-width="0.5"/>`;
 
-    const lx = cx+(maxR+35)*Math.cos(angle);
-    const ly = cy+(maxR+35)*Math.sin(angle);
+    const lx = cx+(maxR+55)*Math.cos(angle);
+    const ly = cy+(maxR+55)*Math.sin(angle);
     const words = comp.name.split(' ');
     const line1 = words.slice(0,Math.ceil(words.length/2)).join(' ');
     const line2 = words.slice(Math.ceil(words.length/2)).join(' ');
     const anchor = angle > -0.1 && angle < Math.PI+0.1 ? (Math.abs(angle-Math.PI/2)<0.3?'middle':'start') : (Math.abs(angle+Math.PI/2)<0.3?'middle':'end');
-    svg += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" font-size="8" fill="var(--text-2)">${line1}</text>`;
-    if(line2) svg += `<text x="${lx}" y="${ly+10}" text-anchor="${anchor}" font-size="8" fill="var(--text-2)">${line2}</text>`;
+    svg += `<text x="${lx}" y="${ly}" text-anchor="${anchor}" font-size="10" font-weight="600" fill="var(--text-2)">${line1}</text>`;
+    if(line2) svg += `<text x="${lx}" y="${ly+12}" text-anchor="${anchor}" font-size="10" fill="var(--text-2)">${line2}</text>`;
   });
 
   // Data polygon
